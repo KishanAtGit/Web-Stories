@@ -1,0 +1,92 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  height: 7vh;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1vw;
+  align-items: center;
+  box-shadow: 0px 0px 8px 2px #00000026;
+}
+
+.register {
+  background-color: #ff7373;
+  width: 5vw;
+}
+
+.sign-in {
+  background-color: #73abff;
+  width: 5vw;
+  margin-right: 2vw;
+}
+
+.categories {
+  margin-top: 3vh;
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+}
+
+.categories .card {
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.categories .card img {
+  width: 11vw;
+  height: 23vh;
+  cursor: pointer;
+}
+
+.stories-section {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4vh;
+  margin-bottom: 5vh;
+}
+
+.stories {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.stories .story-heading {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.stories .story-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 80vw;
+  row-gap: 3vh;
+  justify-content: center;
+}
+
+.stories .story-cards .card {
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stories .story-cards .card img {
+  width: 10vw;
+  height: 40vh;
+  cursor: pointer;
+}
+
+.show-more {
+  background-color: #ff7373;
+}
