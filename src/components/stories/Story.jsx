@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Stories({ category }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
+
+  useEffect(() => {
+    setSeeMoreToggled(false);
+  }, [category]);
 
   return (
     <div className='stories'>
@@ -16,7 +20,7 @@ export default function Stories({ category }) {
             )
         )}
       </div>
-      {!seeMoreToggled && (
+      {!seeMoreToggled && category.stories.length > 4 && (
         <div
           className='button show-more'
           onClick={() => setSeeMoreToggled(!seeMoreToggled)}
