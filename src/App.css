@@ -17,3 +17,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+input {
+  display: flex;
+  justify-content: center;
+  font-family: DM Sans;
+}

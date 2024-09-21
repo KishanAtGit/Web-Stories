@@ -3,6 +3,7 @@ import foodImage from '../assets/food.png';
 
 const categories = [
   {
+    _id: '1',
     name: 'food',
     image: foodImage,
     stories: [
@@ -45,6 +46,7 @@ const categories = [
     ],
   },
   {
+    _id: '2',
     name: 'health and fitness',
     image: fitnessImage,
     stories: [
@@ -75,6 +77,7 @@ const categories = [
     ],
   },
   {
+    _id: '3',
     name: 'travel',
     image: fitnessImage,
     stories: [
@@ -105,6 +108,7 @@ const categories = [
     ],
   },
   {
+    _id: '4',
     name: 'movies',
     image: fitnessImage,
     stories: [
@@ -141,6 +145,7 @@ const categories = [
     ],
   },
   {
+    _id: '5',
     name: 'education',
     image: fitnessImage,
     stories: [

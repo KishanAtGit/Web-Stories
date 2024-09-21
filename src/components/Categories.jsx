@@ -2,29 +2,30 @@ import allCategoryImage from '../assets/all_category.png';
 
 export default function Categories({
   categories,
-  activeIndex,
-  setActiveIndex,
+  activeCategory,
+  setActiveCategory,
 }) {
   return (
     <div className='categories'>
+      {/* default all category */}
       <div
         key={'all'}
         className='card'
-        onClick={() => setActiveIndex('all')}
+        onClick={() => setActiveCategory('all')}
         style={{
-          border: activeIndex === 'all' ? '2px solid blue' : 'none',
+          border: activeCategory === 'all' ? '2px solid blue' : 'none',
           cursor: 'pointer',
         }}
       >
         <img src={allCategoryImage} alt='all' />
       </div>
-      {categories.map((category, index) => (
+      {categories.map(category => (
         <div
-          key={index}
+          key={category._id}
           className='card'
-          onClick={() => setActiveIndex(index)}
+          onClick={() => setActiveCategory(category._id)}
           style={{
-            border: activeIndex === index ? '2px solid blue' : 'none',
+            border: activeCategory === category._id ? '2px solid blue' : 'none',
             cursor: 'pointer',
           }}
         >

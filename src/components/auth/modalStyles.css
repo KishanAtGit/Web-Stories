@@ -1,0 +1,75 @@
+.auth-modal {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  inset: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  border-radius: 1.5em;
+  outline: none;
+  width: 30vw;
+  height: 38vh;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  font-weight: 600;
+}
+.cross-icon {
+  position: absolute;
+  top: 4vh;
+  right: 3vw;
+  cursor: pointer;
+  height: 3vh;
+  width: 1.5vw;
+}
+
+.modal-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-heading {
+  margin-top: 3vh;
+  font-size: 2em;
+}
+
+.modal-button {
+  background-color: #73abff;
+  width: 4vw;
+  margin-top: 3vh;
+}
+
+form {
+  display: flex;
+  gap: 2vw;
+  margin-top: 5vh;
+  margin-bottom: 3vh;
+}
+
+.form-input-labels,
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+  justify-content: center;
+  font-size: 1.5em;
+}
+
+.form-input-labels {
+  gap: 6vh;
+}
+
+.form-inputs input {
+  height: 2.8vh;
+  width: 12vw;
+  padding: 0.3em;
+}
+
+::placeholder {
+  color: #8e8e8e;
+  font-size: 0.7em;
+  font-weight: 600;
+  font-family: DM Sans;
+}
