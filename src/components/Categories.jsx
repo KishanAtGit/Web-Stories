@@ -11,25 +11,41 @@ export default function Categories({
       <div
         key={'all'}
         className='card'
-        onClick={() => setActiveCategory('all')}
+        onClick={() =>
+          setActiveCategory(prev => (prev.includes('all') ? prev : ['all']))
+        }
         style={{
-          border: activeCategory === 'all' ? '2px solid blue' : 'none',
+          border: activeCategory.includes('all') ? '3px solid #008E97' : 'none',
           cursor: 'pointer',
         }}
       >
         <img src={allCategoryImage} alt='all' />
+        <span className='category-name'>All</span>
       </div>
       {categories.map(category => (
         <div
           key={category._id}
           className='card'
-          onClick={() => setActiveCategory(category._id)}
+          onClick={() =>
+            setActiveCategory(prev => {
+              // Remove 'all' if selected and add the specific category
+              if (prev.includes('all')) {
+                return [category._id];
+              }
+              return prev.includes(category._id)
+                ? prev.filter(id => id !== category._id) //Removing the selected category
+                : [...prev, category._id]; // Adds the newly selected category
+            })
+          }
           style={{
-            border: activeCategory === category._id ? '2px solid blue' : 'none',
+            border: activeCategory.includes(category._id)
+              ? '3px solid #008E97'
+              : 'none',
             cursor: 'pointer',
           }}
         >
           <img src={category.image} alt='all' />
+          <span className='category-name'>{category.name}</span>
         </div>
       ))}
     </div>

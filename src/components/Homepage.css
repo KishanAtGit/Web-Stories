@@ -12,12 +12,64 @@
   box-shadow: 0px 0px 8px 2px #00000026;
 }
 
-.register {
+.profile {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  align-items: center;
+  width: 14vw;
+  height: 18vh;
+  position: absolute;
+  top: 7vh;
+  right: 0px;
+  box-shadow: 0px 0px 8px 2px #00000026;
+}
+
+.profile .profile-name {
+  margin-top: 3vh;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.navbar .register,
+.navbar .bookmarks-button,
+.navbar .add-story-button,
+.logout-button {
   background-color: #ff7373;
   width: 5vw;
 }
 
-.sign-in {
+.navbar .bookmarks-button {
+  width: 5.5vw;
+}
+.navbar .bookmarks-button img {
+  width: 1.4vw;
+  height: 2.5vh;
+}
+
+.navbar .profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar .profile-icon img {
+  height: 6vh;
+}
+
+.navbar .hamburger {
+  margin-right: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.navbar .hamburger img {
+  height: 2vh;
+  width: 1vw;
+}
+
+.navbar .sign-in {
   background-color: #73abff;
   width: 5vw;
   margin-right: 2vw;
@@ -31,13 +83,27 @@
 }
 
 .categories .card {
-  border-radius: 1em;
+  position: relative;
+  border-radius: 1.9em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.categories .category-name {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1.6em;
+  font-weight: 600;
+  background-color: #1513131b;
+  border-radius: 0.5em;
+}
+
 .categories .card img {
+  border-radius: 1.8em;
   width: 11vw;
   height: 23vh;
   cursor: pointer;
@@ -75,16 +141,34 @@
 }
 
 .stories .story-cards .card {
+  position: relative;
   border-radius: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.stories .story-cards .card img {
-  width: 15vw;
+.story-cards .card img {
+  width: 17vw;
   height: 60vh;
   cursor: pointer;
+}
+
+.story-cards .card .story-info {
+  position: absolute;
+  color: white;
+  bottom: 5%;
+  left: 18%;
+  width: 13vw;
+}
+
+.story-cards .card .story-info .heading {
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.story-cards .card .story-info .description {
+  font-size: 1em;
 }
 
 .show-more {

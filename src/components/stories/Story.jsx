@@ -1,26 +1,30 @@
 import { useEffect, useState } from 'react';
 
-export default function Stories({ category }) {
+export default function Stories({ stories, categoryHeading, activeCategory }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
 
   useEffect(() => {
     setSeeMoreToggled(false);
-  }, [category]);
+  }, [activeCategory]);
 
   return (
     <div className='stories'>
-      <div className='story-heading'>Top Stories About {category.name}</div>
+      <div className='story-heading'>{categoryHeading}</div>
       <div className='story-cards'>
-        {category.stories.map(
+        {stories.map(
           (story, index) =>
-            (index <= 3 || seeMoreToggled) && (
+            (index < 4 || seeMoreToggled) && (
               <div className='card' key={index}>
                 <img src={story.imageURL} alt='' />
+                <div className='story-info'>
+                  <div className='heading'>{story.heading}</div>
+                  <div className='description'>{story.description}</div>
+                </div>
               </div>
             )
         )}
       </div>
-      {!seeMoreToggled && category.stories.length > 4 && (
+      {!seeMoreToggled && stories.length > 4 && (
         <div
           className='button show-more'
           onClick={() => setSeeMoreToggled(!seeMoreToggled)}
