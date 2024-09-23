@@ -55,7 +55,11 @@ export default function Homepage() {
         />
       )}
       {toggleHamburger && (
-        <UserProfile setToggleHamburger={setToggleHamburger} />
+        <UserProfile
+          setToggleHamburger={setToggleHamburger}
+          setOpenRegisterModal={setOpenRegisterModal}
+          setOpenSignInModal={setOpenSignInModal}
+        />
       )}
     </div>
   );

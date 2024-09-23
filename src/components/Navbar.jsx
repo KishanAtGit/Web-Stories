@@ -23,13 +23,6 @@ export default function Navbar({
           <div className='profile-icon'>
             <img src={profileIcon} alt='profile-icon' />
           </div>
-          <div className='hamburger'>
-            <img
-              src={hamburger}
-              alt='hamburger'
-              onClick={() => setToggleHamburger(prev => !prev)}
-            />
-          </div>
         </>
       ) : (
         <>
@@ -47,6 +40,13 @@ export default function Navbar({
           </div>
         </>
       )}
+      <div style={isSignedIn ? { display: 'flex' } : {}} className='hamburger'>
+        <img
+          src={hamburger}
+          alt='hamburger'
+          onClick={() => setToggleHamburger(prev => !prev)}
+        />
+      </div>
     </div>
   );
 }

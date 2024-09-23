@@ -18,6 +18,7 @@
   flex-direction: column;
   gap: 2vh;
   align-items: center;
+  justify-content: center;
   width: 14vw;
   height: 18vh;
   position: absolute;
@@ -27,14 +28,14 @@
 }
 
 .profile .profile-name {
-  margin-top: 3vh;
   font-size: 1.5em;
   font-weight: 600;
 }
 
-.navbar .register,
-.navbar .bookmarks-button,
-.navbar .add-story-button,
+.register,
+.bookmarks-button,
+.your-story-button,
+.add-story-button,
 .logout-button {
   background-color: #ff7373;
   width: 5vw;
@@ -69,10 +70,70 @@
   width: 1vw;
 }
 
-.navbar .sign-in {
+.sign-in {
   background-color: #73abff;
   width: 5vw;
   margin-right: 2vw;
+}
+
+@media only screen and (min-width: 450px) {
+  .navbar .hamburger {
+    display: none;
+  }
+
+  .profile .register,
+  .profile .sign-in,
+  .profile .bookmarks-button,
+  .profile .your-story-button,
+  .profile .add-story-button,
+  .profile .profile-icon {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .navbar .hamburger {
+    margin-right: 7vw;
+  }
+  .navbar .hamburger img {
+    height: 1.8vh;
+    width: 4vw;
+  }
+
+  .navbar .register,
+  .navbar .sign-in,
+  .navbar .bookmarks-button,
+  .navbar .add-story-button,
+  .navbar .profile-icon {
+    display: none;
+  }
+
+  .profile {
+    width: 100vw;
+    height: 31vh;
+  }
+
+  .sign-in,
+  .register,
+  .bookmarks-button,
+  .your-story-button,
+  .add-story-button,
+  .logout-button {
+    width: 22vw;
+    background-color: #ff7373;
+  }
+
+  .bookmarks-button {
+    gap: 3px;
+  }
+  .bookmarks-button img {
+    width: 3.5vw;
+    height: 2.2vh;
+  }
+
+  .profile-name {
+    font-size: 1.7em;
+  }
 }
 
 .categories {
@@ -107,6 +168,26 @@
   width: 11vw;
   height: 23vh;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {
+  .categories {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+
+  .categories > div:nth-child(1) {
+    margin-left: 75vw;
+  }
+
+  .categories > div:last-child {
+    margin-right: 1vw;
+  }
+
+  .categories .card img {
+    width: 27vw;
+    height: 15vh;
+  }
 }
 
 .stories-section {

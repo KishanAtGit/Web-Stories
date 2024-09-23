@@ -1,8 +1,14 @@
 import { useContext, useEffect } from 'react';
 import { SignedInContext } from '../App';
+import bookmarkIcon from '../assets/bookmarkIcon.svg';
+import profileIcon from '../assets/profileIcon.png';
 
-export default function UserProfile({ setToggleHamburger }) {
-  const { setIsSignedIn } = useContext(SignedInContext);
+export default function UserProfile({
+  setToggleHamburger,
+  setOpenRegisterModal,
+  setOpenSignInModal,
+}) {
+  const { isSignedIn, setIsSignedIn } = useContext(SignedInContext);
   const username = localStorage.getItem('username');
 
   useEffect(() => {
@@ -36,10 +42,51 @@ export default function UserProfile({ setToggleHamburger }) {
 
   return (
     <div className='profile'>
-      <div className='profile-name'>{username}</div>
-      <div className='logout-button button' onClick={handleLogout}>
-        Logout
-      </div>
+      {!isSignedIn ? (
+        <>
+          <div
+            className='sign-in button'
+            onClick={() => setOpenSignInModal(true)}
+          >
+            Login
+          </div>
+          <div
+            className='register button'
+            onClick={() => setOpenRegisterModal(true)}
+          >
+            Register
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5vw',
+            }}
+          >
+            <div className='profile-icon'>
+              <img
+                style={{ width: '7vw' }}
+                src={profileIcon}
+                alt='profile-icon'
+              />
+            </div>
+            <div className='profile-name'>{username}</div>
+          </div>
+          <div className='your-story-button button'>Your Story</div>
+          <div className='add-story-button button'>Add Story</div>
+          <div className='bookmarks-button button'>
+            <img src={bookmarkIcon} alt='icon' />
+            <span>Bookmarks</span>
+          </div>
+
+          <div className='logout-button button' onClick={handleLogout}>
+            Logout
+          </div>
+        </>
+      )}
     </div>
   );
 }
