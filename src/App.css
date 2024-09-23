@@ -23,3 +23,7 @@ input {
   justify-content: center;
   font-family: DM Sans;
 }
+
+::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}

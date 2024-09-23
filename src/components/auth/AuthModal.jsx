@@ -91,10 +91,8 @@ export default function AuthModal({
         />
         <div className='modal-heading'>{modalHeading}</div>
         <form>
-          <div className='form-input-labels'>
-            <span>Username</span> <span>Password</span>
-          </div>
           <div className='form-inputs'>
+            <span>Username</span>
             <input
               type='text'
               placeholder='Enter username'
@@ -106,6 +104,9 @@ export default function AuthModal({
                 },
               })}
             />
+          </div>
+          <div className='form-inputs'>
+            <span>Password</span>
             <div className='password-field'>
               <input
                 type={showPassword ? 'text' : 'password'}

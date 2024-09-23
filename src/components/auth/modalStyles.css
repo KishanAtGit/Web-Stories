@@ -43,22 +43,18 @@
 
 form {
   display: flex;
+  flex-direction: column;
   gap: 2vw;
   margin-top: 5vh;
   margin-bottom: 3vh;
 }
 
-.form-input-labels,
 .form-inputs {
   display: flex;
-  flex-direction: column;
   gap: 4vh;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1.5em;
-}
-
-.form-input-labels {
-  gap: 6vh;
 }
 
 .form-inputs input {
@@ -86,4 +82,44 @@ form {
   font-size: 0.7em;
   font-weight: 600;
   font-family: DM Sans;
+}
+
+@media only screen and (max-width: 450px) {
+  .auth-modal {
+    width: 60vw;
+    height: 45vh;
+  }
+
+  form {
+    gap: 6vh;
+  }
+
+  .form-inputs {
+    flex-direction: column;
+    gap: 0.2em;
+    align-items: flex-start;
+  }
+
+  .form-inputs {
+    font-weight: 600;
+  }
+  .form-inputs input {
+    width: 46vw;
+  }
+
+  .modal-button {
+    width: 22vw;
+  }
+
+  .password-field img {
+    width: 4vw;
+    height: 1.5vh;
+  }
+
+  .cross-icon {
+    top: 3vh;
+    right: 6vw;
+    height: 3vh;
+    width: 6.5vw;
+  }
 }
