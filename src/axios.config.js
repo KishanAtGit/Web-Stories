@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const apiClient = axios.create({
   baseURL: 'https://web-stories-backend.onrender.com/api/',
@@ -16,5 +17,13 @@ apiClient.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const notifyOnSuccess = message => {
+  toast.success(message);
+};
+
+export const notifyOnFail = message => {
+  toast.error(message);
+};
 
 export default apiClient;

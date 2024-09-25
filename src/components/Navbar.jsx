@@ -8,6 +8,7 @@ export default function Navbar({
   setOpenRegisterModal,
   setOpenSignInModal,
   setToggleHamburger,
+  setOpenAddStoryModal,
 }) {
   const { isSignedIn } = useContext(SignedInContext);
 
@@ -19,7 +20,12 @@ export default function Navbar({
             <img src={bookmarkIcon} alt='icon' />
             <span>Bookmarks</span>
           </div>
-          <div className='add-story-button button'>Add Story</div>
+          <div
+            className='add-story-button button'
+            onClick={() => setOpenAddStoryModal(true)}
+          >
+            Add Story
+          </div>
           <div className='profile-icon'>
             <img src={profileIcon} alt='profile-icon' />
           </div>

@@ -5,12 +5,14 @@ import Stories from './stories/Stories';
 import categories from '../mock/category';
 import AuthModal from './auth/AuthModal';
 import UserProfile from './UserProfile';
+import AddStoryModal from './addStoryModal/AddStoryModal';
 import './Homepage.css';
 export default function Homepage() {
   const [activeCategory, setActiveCategory] = useState([]);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [openSignInModal, setOpenSignInModal] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
+  const [openAddStoryModal, setOpenAddStoryModal] = useState(false);
 
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
@@ -29,6 +31,7 @@ export default function Homepage() {
         setOpenRegisterModal={setOpenRegisterModal}
         setOpenSignInModal={setOpenSignInModal}
         setToggleHamburger={setToggleHamburger}
+        setOpenAddStoryModal={setOpenAddStoryModal}
       />
       <Categories
         categories={categories}
@@ -59,6 +62,13 @@ export default function Homepage() {
           setToggleHamburger={setToggleHamburger}
           setOpenRegisterModal={setOpenRegisterModal}
           setOpenSignInModal={setOpenSignInModal}
+          setOpenAddStoryModal={setOpenAddStoryModal}
+        />
+      )}
+      {openAddStoryModal && (
+        <AddStoryModal
+          openAddStoryModal={openAddStoryModal}
+          setOpenAddStoryModal={setOpenAddStoryModal}
         />
       )}
     </div>

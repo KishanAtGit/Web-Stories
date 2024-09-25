@@ -2,11 +2,10 @@ import Modal from 'react-modal';
 import { useContext, useState } from 'react';
 import { SignedInContext } from '../../App';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { loginUser, registerUser } from '../../services/api.users';
 import crossIcon from '../../assets/crossIcon.jpg';
 import passwordEye from '../../assets/passwordEye.png';
-import './modalStyles.css';
+import './AuthModalStyles.css';
 
 export default function AuthModal({
   openAuthModal,
@@ -39,41 +38,21 @@ export default function AuthModal({
       if (modalHeading === 'Register') {
         const res = await registerUser(data);
         if (res.status === 201) {
-          notifyOnSuccess('Registered successfully');
           reset();
           onSuccess();
-        } else if (res.status === 400) {
-          notifyOnFail('User already exists');
         }
       } else if (modalHeading === 'Login') {
         const res = await loginUser(data);
         if (res.status === 202) {
-          localStorage.setItem('token', res.data.token);
-          localStorage.setItem('userId', res.data.userId);
-          localStorage.setItem('username', res.data.username);
-          notifyOnSuccess('Logged in successfully');
           reset();
           setIsSignedIn(true);
           onSuccess();
-        } else if (res.status === 400) {
-          notifyOnFail('Wrong username or password');
         }
       }
     } catch (error) {
       console.error('Error in authentication:', error);
-      notifyOnFail('Error reaching the server');
     }
   };
-
-  const notifyOnSuccess = message => {
-    toast.success(message);
-  };
-
-  const notifyOnFail = message => {
-    toast.error(message);
-  };
-
-  console.log('AuthModal');
 
   return (
     <Modal

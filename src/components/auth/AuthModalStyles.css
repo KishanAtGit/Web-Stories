@@ -15,7 +15,7 @@
   padding: 3em;
   font-weight: 600;
 }
-.cross-icon {
+.auth-modal .cross-icon {
   position: absolute;
   top: 4vh;
   right: 3vw;

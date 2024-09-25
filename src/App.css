@@ -27,3 +27,7 @@ input {
 ::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
+
+.hide {
+  display: none;
+}

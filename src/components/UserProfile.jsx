@@ -7,6 +7,7 @@ export default function UserProfile({
   setToggleHamburger,
   setOpenRegisterModal,
   setOpenSignInModal,
+  setOpenAddStoryModal,
 }) {
   const { isSignedIn, setIsSignedIn } = useContext(SignedInContext);
   const username = localStorage.getItem('username');
@@ -76,7 +77,12 @@ export default function UserProfile({
             <div className='profile-name'>{username}</div>
           </div>
           <div className='your-story-button button'>Your Story</div>
-          <div className='add-story-button button'>Add Story</div>
+          <div
+            className='add-story-button button'
+            onClick={() => setOpenAddStoryModal(true)}
+          >
+            Add Story
+          </div>
           <div className='bookmarks-button button'>
             <img src={bookmarkIcon} alt='icon' />
             <span>Bookmarks</span>

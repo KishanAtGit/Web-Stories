@@ -144,9 +144,6 @@
   scroll-behavior: smooth;
   gap: 2vw;
 }
-.categories > div:first-child {
-  margin-left: 3vw;
-}
 
 .categories .card {
   position: relative;
@@ -187,7 +184,7 @@
   }
 
   .categories > div:last-child {
-    margin-right: 1vw;
+    margin-right: 2vw;
   }
 
   .categories .card img {
