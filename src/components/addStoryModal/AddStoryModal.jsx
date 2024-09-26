@@ -90,8 +90,15 @@ export default function AddStoryModal({
     }
   };
 
+  const customStyle = {
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    },
+  };
+
   return (
     <Modal
+      style={customStyle}
       className={'add-Story-modal'}
       isOpen={openAddStoryModal}
       onRequestClose={handleModalClose}
@@ -103,6 +110,10 @@ export default function AddStoryModal({
         alt='crossIcon'
         onClick={handleModalClose}
       />
+      <div className='modal-heading'>
+        <span className='slide-limit-text'>Add Story to Feed</span>
+        <span className='add-slides-text'>Add upto 6 slides</span>
+      </div>
       <div className='slides'>
         <div className='slide-buttons'>
           {storyData.slides.map((_, index) => (
@@ -116,7 +127,7 @@ export default function AddStoryModal({
                   className='buttons'
                   onClick={() => handleSlideClick(index)}
                 >
-                  {`Slide ${index + 1}`}
+                  <span>Slide&nbsp;</span> <span>{index + 1}</span>
                 </div>
                 {index > 2 && (
                   <img
@@ -134,7 +145,8 @@ export default function AddStoryModal({
                     className='buttons'
                     onClick={handleAddSlide}
                   >
-                    Add +
+                    <span>Add&nbsp;</span>
+                    <span>+</span>
                   </div>
                 </div>
               )}

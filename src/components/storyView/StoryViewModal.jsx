@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
 import storyViewRightIcon from '../../assets/story-view-right-icon.png';
+import slideViewCrossIcon from '../../assets/slide-view-cross-icon.png';
 import './StoryViewModalStyles.css';
 
 export default function StoryViewModal({
@@ -44,7 +45,13 @@ export default function StoryViewModal({
         onClick={handlePreviousClick}
       />
       <div className='slide-view'>
-        <img src={currentSlide.imageURL} alt='' />
+        <img src={currentSlide.imageURL} alt='story-slide' />
+        <img
+          className='slide-view-cross-icon'
+          src={slideViewCrossIcon}
+          alt='crossIcon'
+          onClick={() => handleStoryViewModal(false, null)}
+        />
       </div>
       <img
         className={`slide-navigators ${

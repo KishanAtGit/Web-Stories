@@ -26,6 +26,10 @@
   width: 1.5vw;
 }
 
+.add-Story-modal .modal-heading {
+  display: flex;
+}
+
 .slides {
   display: flex;
   flex-direction: column;
@@ -129,4 +133,93 @@
 .post-button {
   background-color: #ff7373;
   width: 5vw;
+}
+
+@media only screen and (min-width: 450px) {
+  .add-Story-modal .modal-heading {
+    justify-content: right;
+    font-size: 1em;
+  }
+
+  .add-Story-modal .modal-heading .slide-limit-text {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .add-Story-modal {
+    width: 60vw;
+  }
+
+  .add-Story-modal .cross-icon {
+    top: 1vh;
+    right: 2vw;
+    width: 6.8vw;
+  }
+
+  .add-Story-modal .modal-heading {
+    justify-content: center;
+    font-size: 2em;
+    font-weight: 800;
+  }
+
+  .add-Story-modal .modal-heading .add-slides-text {
+    display: none;
+  }
+
+  .slides {
+    flex-direction: row;
+  }
+
+  .slide-buttons {
+    margin-top: 0;
+    justify-content: center;
+  }
+
+  .slides > div {
+    flex-direction: column;
+  }
+
+  .slide-buttons .buttons {
+    width: 12vw;
+    height: 6vh;
+    flex-direction: column;
+  }
+
+  .slide-buttons .slide-delete-icon {
+    height: 1.3vh;
+    width: 2.3vw;
+  }
+
+  .slide-form > div {
+    flex-direction: column;
+  }
+
+  .slide-form input,
+  .slide-form textarea {
+    width: 35vw;
+    height: 2vh;
+    padding: 0.3em;
+  }
+
+  .slide-form textarea {
+    height: 12vh;
+  }
+
+  .slide-form .dropdown {
+    width: 38vw;
+    height: 3.8vh;
+  }
+
+  .add-story-buttons {
+    justify-content: center;
+  }
+
+  .slide-navigator-buttons {
+    display: none;
+  }
+
+  .post-button {
+    width: 14vw;
+  }
 }

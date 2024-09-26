@@ -12,6 +12,18 @@
   gap: 5vw;
 }
 
+.slide-view {
+  position: relative;
+}
+
+.slide-view .slide-view-cross-icon {
+  position: absolute;
+  top: 2vh;
+  left: 3vw;
+  height: 5vh;
+  width: 10.5vw;
+}
+
 .slide-view img {
   width: 20vw;
   height: 75vh;
@@ -21,4 +33,26 @@
 
 .slide-navigators {
   cursor: pointer;
+}
+
+@media only screen and (min-width: 450px) {
+  .slide-view .slide-view-cross-icon {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .slide-navigators {
+    display: none;
+  }
+
+  .story-view-modal {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide-view img {
+    width: 100vw;
+    height: 100vh;
+  }
 }
