@@ -295,3 +295,10 @@
 .show-more {
   background-color: #ff7373;
 }
+
+.no-stories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}

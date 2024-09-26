@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Categories from './Categories';
 import Navbar from './Navbar';
 import Stories from './stories/Stories';
-import categories from '../mock/category';
+import categories from '../constant/categories';
 import AuthModal from './auth/AuthModal';
 import UserProfile from './UserProfile';
 import AddStoryModal from './addStoryModal/AddStoryModal';

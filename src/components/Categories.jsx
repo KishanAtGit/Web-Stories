@@ -30,15 +30,15 @@ export default function Categories({
             setActiveCategory(prev => {
               // Remove 'all' if selected and add the specific category
               if (prev.includes('all')) {
-                return [category._id];
+                return [category.name];
               }
-              return prev.includes(category._id)
-                ? prev.filter(id => id !== category._id) //Removing the selected category
-                : [...prev, category._id]; // Adds the newly selected category
+              return prev.includes(category.name)
+                ? prev.filter(name => name !== category.name) //Removing the selected category
+                : [...prev, category.name]; // Adds the newly selected category
             })
           }
           style={{
-            border: activeCategory.includes(category._id)
+            border: activeCategory.includes(category.name)
               ? '3px solid #008E97'
               : 'none',
             cursor: 'pointer',
