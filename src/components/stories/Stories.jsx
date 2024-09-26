@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import { SignedInContext } from '../../App';
 import Story from './Story';
-import stories from '../../mock/stories';
-import yourStories from '../../mock/yourStories';
 
-export default function Stories({ categories, activeCategory }) {
+export default function Stories({
+  categories,
+  activeCategory,
+  stories,
+  yourStories,
+}) {
   const { isSignedIn } = useContext(SignedInContext);
-
-  console.log(activeCategory, 'activeCategory');
 
   return (
     <div className='stories-section'>

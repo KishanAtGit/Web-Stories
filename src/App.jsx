@@ -10,7 +10,14 @@ export const SignedInContext = createContext();
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  console.log('App');
+  const [storyViewModal, setStoryViewModal] = useState({
+    openModal: false,
+    storyId: '',
+  });
+
+  const handleStoryViewModal = (openModal, storyId) => {
+    setStoryViewModal(prev => ({ ...prev, openModal, storyId }));
+  };
 
   return (
     <>
@@ -19,7 +26,15 @@ export default function App() {
           <Route
             path='/'
             element={
-              <SignedInContext.Provider value={{ isSignedIn, setIsSignedIn }}>
+              <SignedInContext.Provider
+                value={{
+                  isSignedIn,
+                  setIsSignedIn,
+                  storyViewModal,
+                  setStoryViewModal,
+                  handleStoryViewModal,
+                }}
+              >
                 <Homepage />
               </SignedInContext.Provider>
             }

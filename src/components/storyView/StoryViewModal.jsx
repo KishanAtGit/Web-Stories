@@ -1,0 +1,59 @@
+import Modal from 'react-modal';
+import { useState } from 'react';
+import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
+import storyViewRightIcon from '../../assets/story-view-right-icon.png';
+import './StoryViewModalStyles.css';
+
+export default function StoryViewModal({
+  storyViewModal,
+  story,
+  handleStoryViewModal,
+}) {
+  if (!story) return null;
+
+  console.log(story, 'story');
+  const [currentSlide, setCurrentSlide] = useState(story.slides[0]);
+
+  const customStyles = {
+    overlay: {
+      backgroundColor: '#000000E5',
+    },
+  };
+
+  const handleNextClick = () => {
+    setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
+  };
+  const handlePreviousClick = () => {
+    setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) - 1]);
+  };
+
+  return (
+    <Modal
+      style={customStyles}
+      className='story-view-modal'
+      isOpen={storyViewModal.openModal}
+      onRequestClose={() => handleStoryViewModal(false, null)}
+      ariaHideApp={false}
+    >
+      <img
+        className={`slide-navigators ${
+          currentSlide === story.slides[0] ? 'hidden' : ''
+        }`}
+        src={storyViewLeftIcon}
+        alt=''
+        onClick={handlePreviousClick}
+      />
+      <div className='slide-view'>
+        <img src={currentSlide.imageURL} alt='' />
+      </div>
+      <img
+        className={`slide-navigators ${
+          currentSlide === story.slides[story.slides.length - 1] ? 'hidden' : ''
+        }`}
+        src={storyViewRightIcon}
+        alt=''
+        onClick={handleNextClick}
+      />
+    </Modal>
+  );
+}
