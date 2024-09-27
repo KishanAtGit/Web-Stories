@@ -10,6 +10,7 @@ export default function StoryViewModal({
   storyViewModal,
   story,
   handleStoryViewModal,
+  toggleBookmark,
 }) {
   if (!story) return null;
 

@@ -18,6 +18,8 @@ export default function App() {
   });
   const [storyUpdatedToggle, setStoryUpdatedToggle] = useState(false);
 
+  console.log(storyViewModal, 'storyViewModal');
+
   const handleStoryViewModal = (openModal, storyId) => {
     setStoryViewModal(prev => ({ ...prev, openModal, storyId }));
   };

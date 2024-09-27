@@ -14,6 +14,8 @@ export default function UserProfile({
   const username = localStorage.getItem('username');
 
   useEffect(() => {
+    window.addEventListener('click', handleHanburgerClose);
+
     window.addEventListener('click', handleClickOutside);
 
     window.addEventListener('scroll', handleScroll);
@@ -23,6 +25,12 @@ export default function UserProfile({
       window.removeEventListener('scroll', handleScroll);
     };
   });
+
+  const handleHanburgerClose = () => {
+    if (event.target.closest('.button')) {
+      setToggleHamburger(false);
+    }
+  };
 
   const handleClickOutside = event => {
     if (!event.target.closest('.hamburger, .profile')) {
@@ -39,8 +47,6 @@ export default function UserProfile({
     setIsSignedIn(false);
     setToggleHamburger(false);
   };
-
-  console.log('UserProfile', username);
 
   return (
     <div className='profile'>
