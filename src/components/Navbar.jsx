@@ -9,6 +9,7 @@ export default function Navbar({
   setOpenSignInModal,
   setToggleHamburger,
   setOpenAddStoryModal,
+  setToggleBookmark,
 }) {
   const { isSignedIn } = useContext(SignedInContext);
 
@@ -16,7 +17,10 @@ export default function Navbar({
     <div className='navbar'>
       {isSignedIn ? (
         <>
-          <div className='bookmarks-button button'>
+          <div
+            onClick={() => setToggleBookmark(prev => !prev)}
+            className='bookmarks-button button'
+          >
             <img src={bookmarkIcon} alt='icon' />
             <span>Bookmarks</span>
           </div>

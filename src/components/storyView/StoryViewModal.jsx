@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { SignedInContext } from '../../App';
 import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
 import storyViewRightIcon from '../../assets/story-view-right-icon.png';
 import slideViewCrossIcon from '../../assets/slide-view-cross-icon.png';
@@ -15,11 +16,7 @@ export default function StoryViewModal({
   console.log(story, 'story');
   const [currentSlide, setCurrentSlide] = useState(story.slides[0]);
 
-  const customStyles = {
-    overlay: {
-      backgroundColor: '#000000E5',
-    },
-  };
+  const { customModalStyles } = useContext(SignedInContext);
 
   const handleNextClick = () => {
     setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
@@ -30,7 +27,7 @@ export default function StoryViewModal({
 
   return (
     <Modal
-      style={customStyles}
+      style={customModalStyles}
       className='story-view-modal'
       isOpen={storyViewModal.openModal}
       onRequestClose={() => handleStoryViewModal(false, null)}

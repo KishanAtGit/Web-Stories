@@ -1,8 +1,5 @@
 .story-view-modal {
   position: absolute;
-  align-self: center;
-  justify-self: center;
-  inset: 40px;
   background: transparent;
   outline: none;
   width: 35vw;
@@ -54,5 +51,6 @@
   .slide-view img {
     width: 100vw;
     height: 100vh;
+    object-fit: cover;
   }
 }

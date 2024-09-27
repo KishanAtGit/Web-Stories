@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { getStoriesAPI, getYourStoriesAPI } from '../services/api.stories';
 import { SignedInContext } from '../App';
 import Categories from './Categories';
 import Navbar from './Navbar';
@@ -8,8 +9,10 @@ import UserProfile from './UserProfile';
 import AddStoryModal from './addStoryModal/AddStoryModal';
 import StoryViewModal from './storyView/StoryViewModal';
 import categories from '../constant/categories';
-import stories from '../mock/stories';
-import yourStories from '../mock/yourStories';
+import Story from './stories/Story';
+// import stories from '../mock/stories';
+// import yourStories from '../mock/yourStories';
+import yourBookmarks from '../mock/bookmarks';
 import './Homepage.css';
 export default function Homepage() {
   const [activeCategory, setActiveCategory] = useState([]);
@@ -17,7 +20,17 @@ export default function Homepage() {
   const [openSignInModal, setOpenSignInModal] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
   const [openAddStoryModal, setOpenAddStoryModal] = useState(false);
-  const { storyViewModal, handleStoryViewModal } = useContext(SignedInContext);
+  const [toggleBookmark, setToggleBookmark] = useState(false);
+  const {
+    isSignedIn,
+    storyViewModal,
+    handleStoryViewModal,
+    storyUpdatedToggle,
+  } = useContext(SignedInContext);
+
+  const [allStories, setAllStories] = useState([]);
+  const [yourStories, setYourStories] = useState([]);
+  // const [yourBookmarks, setYourBookmarks] = useState([]);
 
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
@@ -28,7 +41,36 @@ export default function Homepage() {
     setOpenSignInModal(false);
   };
 
-  console.log(storyViewModal, 'storyViewModal');
+  useEffect(() => {
+    const getAllStories = async () => {
+      try {
+        const response = await getStoriesAPI();
+        if (response.status === 200) {
+          setAllStories(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllStories();
+
+    const getYourStories = async () => {
+      try {
+        const yourStories = await getYourStoriesAPI();
+        if (yourStories.status === 200) {
+          setYourStories(yourStories.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    isSignedIn && getYourStories();
+  }, [isSignedIn, storyUpdatedToggle]);
+
+  useEffect(() => {
+    setActiveCategory([]);
+    setToggleBookmark(false);
+  }, [isSignedIn]);
 
   return (
     <div className='homepage'>
@@ -37,34 +79,63 @@ export default function Homepage() {
         setOpenSignInModal={setOpenSignInModal}
         setToggleHamburger={setToggleHamburger}
         setOpenAddStoryModal={setOpenAddStoryModal}
+        setToggleBookmark={setToggleBookmark}
       />
-      <Categories
-        categories={categories}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-      />
-      <Stories
-        categories={categories}
-        activeCategory={activeCategory}
-        stories={stories}
-        yourStories={yourStories}
-      />
-      {openRegisterModal && (
-        <AuthModal
-          openAuthModal={openRegisterModal}
-          setOpenAuthModal={setOpenRegisterModal}
-          modalHeading={'Register'}
-          modalButtonText={'Register'}
-          onSuccess={handleRegisterSuccess}
-        />
-      )}
-      {openSignInModal && (
-        <AuthModal
-          openAuthModal={openSignInModal}
-          setOpenAuthModal={setOpenSignInModal}
-          modalHeading={'Login'}
-          modalButtonText={'Login'}
-          onSuccess={handleLoginSuccess}
+      {!toggleBookmark ? (
+        <>
+          <Categories
+            categories={categories}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
+          <Stories
+            categories={categories}
+            activeCategory={activeCategory}
+            stories={allStories}
+            yourStories={yourStories}
+          />
+          {openRegisterModal && (
+            <AuthModal
+              openAuthModal={openRegisterModal}
+              setOpenAuthModal={setOpenRegisterModal}
+              modalHeading={'Register'}
+              modalButtonText={'Register'}
+              onSuccess={handleRegisterSuccess}
+            />
+          )}
+          {openSignInModal && (
+            <AuthModal
+              openAuthModal={openSignInModal}
+              setOpenAuthModal={setOpenSignInModal}
+              modalHeading={'Login'}
+              modalButtonText={'Login'}
+              onSuccess={handleLoginSuccess}
+            />
+          )}
+
+          {openAddStoryModal && (
+            <AddStoryModal
+              openAddStoryModal={openAddStoryModal}
+              setOpenAddStoryModal={setOpenAddStoryModal}
+            />
+          )}
+          {storyViewModal && (
+            <StoryViewModal
+              storyViewModal={storyViewModal}
+              story={
+                allStories.filter(
+                  story => story._id === storyViewModal.storyId
+                )[0]
+              }
+              handleStoryViewModal={handleStoryViewModal}
+            />
+          )}
+        </>
+      ) : (
+        <Story
+          toggleBookmark={toggleBookmark}
+          stories={yourBookmarks}
+          categoryHeading={'Your Bookmarks'}
         />
       )}
       {toggleHamburger && (
@@ -73,21 +144,7 @@ export default function Homepage() {
           setOpenRegisterModal={setOpenRegisterModal}
           setOpenSignInModal={setOpenSignInModal}
           setOpenAddStoryModal={setOpenAddStoryModal}
-        />
-      )}
-      {openAddStoryModal && (
-        <AddStoryModal
-          openAddStoryModal={openAddStoryModal}
-          setOpenAddStoryModal={setOpenAddStoryModal}
-        />
-      )}
-      {storyViewModal && (
-        <StoryViewModal
-          storyViewModal={storyViewModal}
-          story={
-            stories.filter(story => story._id === storyViewModal.storyId)[0]
-          }
-          handleStoryViewModal={handleStoryViewModal}
+          setToggleBookmark={setToggleBookmark}
         />
       )}
     </div>

@@ -8,6 +8,7 @@ export default function UserProfile({
   setOpenRegisterModal,
   setOpenSignInModal,
   setOpenAddStoryModal,
+  setToggleBookmark,
 }) {
   const { isSignedIn, setIsSignedIn } = useContext(SignedInContext);
   const username = localStorage.getItem('username');
@@ -83,7 +84,10 @@ export default function UserProfile({
           >
             Add Story
           </div>
-          <div className='bookmarks-button button'>
+          <div
+            onClick={() => setToggleBookmark(prev => !prev)}
+            className='bookmarks-button button'
+          >
             <img src={bookmarkIcon} alt='icon' />
             <span>Bookmarks</span>
           </div>

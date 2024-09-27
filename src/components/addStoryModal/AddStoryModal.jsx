@@ -1,7 +1,8 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
-import SlideForm from './SlideForm';
+import { useState, useContext } from 'react';
+import { SignedInContext } from '../../App';
 import { createStoryAPI } from '../../services/api.stories';
+import SlideForm from './SlideForm';
 
 import crossIcon from '../../assets/crossIcon.jpg';
 import './AddStoryModalStyles.css';
@@ -37,8 +38,8 @@ export default function AddStoryModal({
   });
 
   const [selectedSlide, setSelectedSlide] = useState(0);
-
-  console.log('storyData', storyData);
+  const { setStoryUpdatedToggle } = useContext(SignedInContext);
+  const { customModalStyles } = useContext(SignedInContext);
 
   const handleModalClose = () => {
     setOpenAddStoryModal(false);
@@ -86,19 +87,14 @@ export default function AddStoryModal({
   const handleCreateStory = async () => {
     const res = await createStoryAPI(storyData);
     if (res.status === 201) {
+      setStoryUpdatedToggle(prev => !prev);
       handleModalClose();
     }
   };
 
-  const customStyle = {
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    },
-  };
-
   return (
     <Modal
-      style={customStyle}
+      style={customModalStyles}
       className={'add-Story-modal'}
       isOpen={openAddStoryModal}
       onRequestClose={handleModalClose}
@@ -121,7 +117,7 @@ export default function AddStoryModal({
               <div
                 style={{ position: 'relative' }}
                 className={selectedSlide === index ? 'selected' : ''}
-                key={index}
+                key={'fdsf' + index}
               >
                 <div
                   className='buttons'
@@ -139,12 +135,8 @@ export default function AddStoryModal({
                 )}
               </div>
               {index + 1 === storyData.slides.length && index < 5 && (
-                <div>
-                  <div
-                    key={'addNewSlide'}
-                    className='buttons'
-                    onClick={handleAddSlide}
-                  >
+                <div key={'addNewSlide'}>
+                  <div className='buttons' onClick={handleAddSlide}>
                     <span>Add&nbsp;</span>
                     <span>+</span>
                   </div>

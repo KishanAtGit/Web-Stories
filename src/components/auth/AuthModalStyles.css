@@ -1,8 +1,5 @@
 .auth-modal {
   position: absolute;
-  align-self: center;
-  justify-self: center;
-  inset: 40px;
   border: 1px solid rgb(204, 204, 204);
   background: rgb(255, 255, 255);
   border-radius: 1.5em;
@@ -116,9 +113,9 @@ form {
     height: 1.5vh;
   }
 
-  .cross-icon {
-    top: 3vh;
-    right: 6vw;
+  .auth-modal .cross-icon {
+    top: 2vh;
+    right: 4vw;
     height: 3vh;
     width: 6.5vw;
   }

@@ -31,7 +31,7 @@ export default function AuthModal({
     reset();
   };
 
-  const { setIsSignedIn } = useContext(SignedInContext);
+  const { setIsSignedIn, customModalStyles } = useContext(SignedInContext);
 
   const onSubmit = async data => {
     try {
@@ -56,6 +56,7 @@ export default function AuthModal({
 
   return (
     <Modal
+      style={customModalStyles}
       isOpen={openAuthModal}
       onRequestClose={handleModalClose}
       className={'auth-modal'}

@@ -83,10 +83,10 @@ export default function SlideForm({
           onChange={handleCategorySelection}
         >
           <option value=''>Select category</option>
-          <option value='food'>Food</option>
-          <option value='health-fitness'>Health and Fitness</option>
-          <option value='travel'>Travel</option>
-          <option value='movies'>Movies</option>
+          <option value='Food'>Food</option>
+          <option value='Health and Fitness'>Health and Fitness</option>
+          <option value='Travel'>Travel</option>
+          <option value='Movies'>Movies</option>
           <option value='Education'>Education</option>
         </select>
       </div>
