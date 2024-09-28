@@ -22,6 +22,7 @@ export default function Homepage() {
   const [toggleHamburger, setToggleHamburger] = useState(false);
   const [openAddStoryModal, setOpenAddStoryModal] = useState(false);
   const [toggleBookmark, setToggleBookmark] = useState(false);
+  // const [isSingleSlideViewed, setIsSingleSlideViewed] = useState(false);
   const {
     isSignedIn,
     storyViewModal,
@@ -81,9 +82,24 @@ export default function Homepage() {
       }
     };
     isSignedIn && getBookmarks();
-  }, [isSignedIn]);
+  }, [isSignedIn, storyUpdatedToggle]);
 
-  console.log(yourBookmarks, 'yourBookmarks');
+  // useEffect(() => {
+  //   console.log(toggleBookmark, 'toggleBookmark is true inside useEffect');
+  //   console.log(isSignedIn, 'isSignedIn is true inside useEffect');
+
+  //   // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
+  //   setIsSingleSlideViewed(toggleBookmark);
+  //   // console.log(toggleBookmark, 'toggleBookmark');
+  //   // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
+  // });
+
+  // console.log(isSignedIn, 'isSignedIn');
+
+  // console.log(toggleBookmark, 'toggleBookmark');
+  // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
+
+  // console.log(yourBookmarks, 'yourBookmarks');
 
   return (
     <div className='homepage'>
@@ -102,7 +118,7 @@ export default function Homepage() {
         />
       ) : (
         <Story
-          toggleBookmark={toggleBookmark}
+          isSingleSlideViewed={toggleBookmark}
           stories={yourBookmarks}
           categoryHeading={'Your Bookmarks'}
         />
@@ -145,17 +161,12 @@ export default function Homepage() {
           storyViewModal={storyViewModal}
           story={
             toggleBookmark
-              ? allStories.filter(story =>
-                  story.slides.find(
-                    slide => slide._id === storyViewModal.storyId
-                  )
-                )[0]
-              : allStories.filter(
-                  story => story._id === storyViewModal.storyId
-                )[0]
+              ? allStories.find(story => story._id === storyViewModal.storyId)
+              : allStories.find(story => story._id === storyViewModal.storyId)
           }
           handleStoryViewModal={handleStoryViewModal}
-          toggleBookmark={toggleBookmark}
+          isSingleSlideViewed={toggleBookmark}
+          yourBookmarks={yourBookmarks}
         />
       )}
       {toggleHamburger && (

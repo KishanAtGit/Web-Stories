@@ -13,32 +13,83 @@
   position: relative;
 }
 
-.slide-view .slide-view-cross-icon {
-  position: absolute;
-  top: 2vh;
-  left: 3vw;
-  height: 5vh;
-  width: 10.5vw;
-}
-
-.slide-view img {
+.slide-view .story-slide {
   width: 20vw;
   height: 75vh;
   border-radius: 1em;
   box-shadow: 0px 0px 30px -13px #ffffffe2;
 }
 
+.slide-view .slide-view-cross-icon {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  height: 2.7vh;
+  width: 1.2vw;
+  cursor: pointer;
+}
+
 .slide-navigators {
   cursor: pointer;
 }
 
-@media only screen and (min-width: 450px) {
-  .slide-view .slide-view-cross-icon {
-    display: none;
-  }
+.story-view-modal .story-info {
+  position: absolute;
+  color: white;
+  bottom: 12%;
+  left: 5%;
+  width: 18vw;
+}
+
+.story-view-modal .story-info .heading {
+  width: 12vw;
+  text-wrap: pretty;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.story-view-modal .story-info .description {
+  font-size: 1em;
+}
+
+.story-view-modal .bookmark {
+  position: absolute;
+  bottom: 4%;
+  left: 13%;
+  height: 3.8vh;
+  width: 1.4vw;
+  cursor: pointer;
+}
+
+.story-view-modal .likes {
+  position: absolute;
+  bottom: 4%;
+  right: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vw;
+}
+
+.story-view-modal .likes img {
+  height: 4vh;
+  width: 1.8vw;
+  cursor: pointer;
+}
+
+.story-view-modal .likes-count {
+  color: white;
+  font-size: 1.3em;
 }
 
 @media only screen and (max-width: 450px) {
+  .slide-view .slide-view-cross-icon {
+    top: 6%;
+    left: 5%;
+    height: 3vh;
+    width: 6.5vw;
+  }
+
   .slide-navigators {
     display: none;
   }
@@ -48,9 +99,45 @@
     height: 100vh;
   }
 
-  .slide-view img {
+  .slide-view .story-slide {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
+  }
+
+  .story-view-modal .story-info {
+    bottom: 12%;
+    left: 8%;
+    width: 85vw;
+  }
+
+  .story-view-modal .story-info .heading {
+    width: 50vw;
+    font-size: 2.5em;
+    font-weight: 600;
+  }
+
+  .story-view-modal .story-info .description {
+    font-size: 1.5em;
+  }
+
+  .story-view-modal .bookmark {
+    bottom: 3%;
+    height: 4.7vh;
+    width: 8vw;
+  }
+
+  .story-view-modal .likes {
+    bottom: 3%;
+    gap: 1.5vw;
+  }
+
+  .story-view-modal .likes img {
+    height: 5vh;
+    width: 11vw;
+  }
+
+  .story-view-modal .likes-count {
+    font-size: 1.9em;
   }
 }

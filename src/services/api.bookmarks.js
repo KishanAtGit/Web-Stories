@@ -15,8 +15,8 @@ export const getYourBookmarksAPI = async () => {
 export const createBookmarkAPI = async bookmarksData => {
   const userId = localStorage.getItem('userId');
   try {
-    const response = await apiClient.post('bookmark/createBookmarks', {
-      ...bookmarksData,
+    const response = await apiClient.post('bookmark/updateBookmark', {
+      bookmarksData,
       createdBy: userId,
     });
     // if (response.status === 201) {

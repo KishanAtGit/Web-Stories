@@ -5,7 +5,7 @@ export default function Story({
   stories,
   categoryHeading,
   activeCategory,
-  toggleBookmark,
+  isSingleSlideViewed,
 }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
   const { handleStoryViewModal } = useContext(SignedInContext);
@@ -16,7 +16,7 @@ export default function Story({
 
   return (
     <>
-      {toggleBookmark ? (
+      {isSingleSlideViewed ? (
         <div
           style={{ marginTop: '4vh', marginBottom: '4vh' }}
           className='stories'
@@ -29,7 +29,13 @@ export default function Story({
                   (index < 4 || seeMoreToggled) && (
                     <div className='card' key={index}>
                       <img
-                        onClick={() => handleStoryViewModal(true, slide._id)}
+                        onClick={() =>
+                          handleStoryViewModal(
+                            true,
+                            slide.storyId,
+                            slide.slideId
+                          )
+                        }
                         src={slide.imageURL}
                         alt=''
                       />

@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { SignedInContext } from '../../App';
 import Story from './Story';
 
+import './StoryStyles.css';
+
 export default function Stories({
   categories,
   activeCategory,

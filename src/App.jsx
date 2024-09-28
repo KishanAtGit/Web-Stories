@@ -15,13 +15,14 @@ export default function App() {
   const [storyViewModal, setStoryViewModal] = useState({
     openModal: false,
     storyId: '',
+    slideId: '',
   });
   const [storyUpdatedToggle, setStoryUpdatedToggle] = useState(false);
 
   console.log(storyViewModal, 'storyViewModal');
 
-  const handleStoryViewModal = (openModal, storyId) => {
-    setStoryViewModal(prev => ({ ...prev, openModal, storyId }));
+  const handleStoryViewModal = (openModal, storyId, slideId = '') => {
+    setStoryViewModal(prev => ({ ...prev, openModal, storyId, slideId }));
   };
 
   const customModalStyles = {
