@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { useState, useContext } from 'react';
 import { SignedInContext } from '../../App';
-import { createStoryAPI } from '../../services/api.stories';
+import { createStoryAPI, editStoryAPI } from '../../services/api.stories';
 import SlideForm from './SlideForm';
 
 import crossIcon from '../../assets/crossIcon.jpg';
@@ -10,32 +10,40 @@ import './AddStoryModalStyles.css';
 export default function AddStoryModal({
   openAddStoryModal,
   setOpenAddStoryModal,
+  story,
+  isEditMode,
+  setIsEditMode,
+  setEditStory,
 }) {
-  const [storyData, setStoryData] = useState({
-    category: '',
-    slides: [
-      {
-        heading: '',
-        description: '',
-        imageURL: '',
-      },
-      {
-        heading: '',
-        description: '',
-        imageURL: '',
-      },
-      {
-        heading: '',
-        description: '',
-        imageURL: '',
-      },
-      {
-        heading: '',
-        description: '',
-        imageURL: '',
-      },
-    ],
-  });
+  const [storyData, setStoryData] = useState(
+    isEditMode
+      ? story
+      : {
+          category: '',
+          slides: [
+            {
+              heading: '',
+              description: '',
+              imageURL: '',
+            },
+            {
+              heading: '',
+              description: '',
+              imageURL: '',
+            },
+            {
+              heading: '',
+              description: '',
+              imageURL: '',
+            },
+            {
+              heading: '',
+              description: '',
+              imageURL: '',
+            },
+          ],
+        }
+  );
 
   const [selectedSlide, setSelectedSlide] = useState(0);
   const { setStoryUpdatedToggle } = useContext(SignedInContext);
@@ -44,6 +52,7 @@ export default function AddStoryModal({
   const handleModalClose = () => {
     setOpenAddStoryModal(false);
     setSelectedSlide(null);
+    isEditMode && (setIsEditMode(false), setEditStory(null));
   };
 
   const handleSlideClick = index => {
@@ -87,6 +96,14 @@ export default function AddStoryModal({
   const handleCreateStory = async () => {
     const res = await createStoryAPI(storyData);
     if (res.status === 201) {
+      setStoryUpdatedToggle(prev => !prev);
+      handleModalClose();
+    }
+  };
+
+  const handleUpdateStory = async () => {
+    const res = await editStoryAPI(story._id, storyData);
+    if (res.status === 200) {
       setStoryUpdatedToggle(prev => !prev);
       handleModalClose();
     }
@@ -172,7 +189,10 @@ export default function AddStoryModal({
             Next
           </div>
         </div>
-        <div className='post-button button' onClick={handleCreateStory}>
+        <div
+          className='post-button button'
+          onClick={isEditMode ? handleUpdateStory : handleCreateStory}
+        >
           Post
         </div>
       </div>

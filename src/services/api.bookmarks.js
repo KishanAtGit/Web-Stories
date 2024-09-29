@@ -5,9 +5,9 @@ export const getYourBookmarksAPI = async () => {
 
   try {
     const response = await apiClient.get(`bookmark/getYourBookmarks/${userId}`);
-    return response.data;
+    return response;
   } catch (error) {
-    if (error.status === 404) notifyOnFail('Server Error');
+    // if (error.status === 404) notifyOnFail('No Bookmarks');
     return error.response;
   }
 };

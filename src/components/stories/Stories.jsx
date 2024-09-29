@@ -9,6 +9,7 @@ export default function Stories({
   activeCategory,
   stories,
   yourStories,
+  setOpenAddStoryModal,
 }) {
   const { isSignedIn } = useContext(SignedInContext);
 
@@ -27,6 +28,7 @@ export default function Stories({
           }
           categoryHeading={'Your Stories'}
           activeCategory={activeCategory}
+          setOpenAddStoryModal={setOpenAddStoryModal}
         />
       )}
       {activeCategory.length === 0 || activeCategory.includes('all')

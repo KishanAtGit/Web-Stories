@@ -14,6 +14,7 @@ export default function StoryViewModal({
   handleStoryViewModal,
   isSingleSlideViewed,
   yourBookmarks,
+  setOpenSignInModal,
 }) {
   if (!story) return null;
 
@@ -32,8 +33,6 @@ export default function StoryViewModal({
     setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) - 1]);
   };
 
-  console.log(currentSlide, 'currentSlide');
-  console.log(yourBookmarks, 'yourBookmarks');
   console.log(story, 'story');
 
   return (
@@ -44,16 +43,6 @@ export default function StoryViewModal({
       onRequestClose={() => handleStoryViewModal(false, null, null)}
       ariaHideApp={false}
     >
-      {!isSingleSlideViewed && (
-        <img
-          className={`slide-navigators ${
-            currentSlide === story.slides[0] ? 'hidden' : ''
-          }`}
-          src={storyViewLeftIcon}
-          alt=''
-          onClick={handlePreviousClick}
-        />
-      )}
       <div className='slide-view'>
         <img
           className='story-slide'
@@ -77,13 +66,24 @@ export default function StoryViewModal({
           )}
           storyId={story._id}
           currentSlide={currentSlide}
+          setOpenSignInModal={setOpenSignInModal}
         />
         <Likes />
       </div>
       {!isSingleSlideViewed && (
         <img
-          className={`slide-navigators ${
-            currentSlide === story.slides[story.slides.length - 1]
+          className={`slide-navigators left-navigator ${
+            currentSlide._id === story.slides[0]._id ? 'hidden' : ''
+          }`}
+          src={storyViewLeftIcon}
+          alt=''
+          onClick={handlePreviousClick}
+        />
+      )}
+      {!isSingleSlideViewed && (
+        <img
+          className={`slide-navigators right-navigator ${
+            currentSlide._id === story.slides[story.slides.length - 1]._id
               ? 'hidden'
               : ''
           }`}

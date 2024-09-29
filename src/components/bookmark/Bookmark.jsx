@@ -1,40 +1,43 @@
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { createBookmarkAPI } from '../../services/api.bookmarks';
 import { SignedInContext } from '../../App';
 import unbookmark from '../../assets/unbookmark.png';
 import bookmark from '../../assets/bookmark.png';
 
-export default function Bookmark({ isPreBookmarked, storyId, currentSlide }) {
-  const [toggleBookmark, setToggleBookmark] = useState(isPreBookmarked);
-  const { setStoryUpdatedToggle } = useContext(SignedInContext);
+export default function Bookmark({
+  isPreBookmarked,
+  storyId,
+  currentSlide,
+  setOpenSignInModal,
+}) {
+  const { isSignedIn, setStoryUpdatedToggle } = useContext(SignedInContext);
 
-  useEffect(() => {
-    const updateBookmark = async () => {
-      try {
-        const res = await createBookmarkAPI({
-          storyId,
-          slideId: currentSlide._id,
-          ...currentSlide,
-        });
-        if (res.status === 201 || res.status === 200) {
-          setStoryUpdatedToggle(prev => !prev);
-        }
-      } catch (error) {
-        console.log(error);
+  const handleBookmarkToggle = async () => {
+    !isSignedIn && setOpenSignInModal(true);
+    isSignedIn && (await updateBookmark());
+  };
+
+  const updateBookmark = async () => {
+    try {
+      const res = await createBookmarkAPI({
+        storyId,
+        slideId: currentSlide._id,
+        ...currentSlide,
+      });
+      if (res.status === 201 || res.status === 200) {
+        setStoryUpdatedToggle(prev => !prev);
       }
-    };
-
-    if (toggleBookmark !== isPreBookmarked) {
-      updateBookmark();
+    } catch (error) {
+      console.log(error);
     }
-  }, [toggleBookmark]);
+  };
 
   return (
     <img
       className='bookmark'
-      src={toggleBookmark ? bookmark : unbookmark}
+      src={isPreBookmarked ? bookmark : unbookmark}
       alt='bookmark'
-      onClick={() => setToggleBookmark(prev => !prev)}
+      onClick={handleBookmarkToggle}
     />
   );
 }

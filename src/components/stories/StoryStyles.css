@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-.story-cards .card img {
+.story-cards .card .story-image {
   width: 17vw;
   height: 60vh;
   border-radius: 1em;
@@ -63,6 +63,15 @@
   font-size: 1em;
 }
 
+.story-cards .card .edit-icon {
+  position: absolute;
+  bottom: -4%;
+  left: 38%;
+  height: 2vw;
+  width: 9vh;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 450px) {
   .stories-section {
     margin-top: 2vh;
@@ -79,7 +88,7 @@
     row-gap: 2vh;
   }
 
-  .story-cards .card img {
+  .story-cards .card .story-image {
     width: 85vw;
     height: 63vh;
   }
@@ -87,6 +96,7 @@
   .story-cards .card .story-info {
     left: 8%;
     width: 70vw;
+    bottom: 7%;
   }
 
   .story-cards .card .story-info .heading {
@@ -96,6 +106,13 @@
 
   .story-cards .card .story-info .description {
     font-size: 1.3em;
+  }
+
+  .story-cards .card .edit-icon {
+    bottom: -1%;
+    left: 38%;
+    height: 10vw;
+    width: 10vh;
   }
 }
 

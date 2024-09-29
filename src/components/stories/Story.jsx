@@ -1,14 +1,20 @@
 import { useEffect, useState, useContext } from 'react';
 import { SignedInContext } from '../../App';
+import AddStoryModal from '../addStoryModal/AddStoryModal';
+
+import editIcon from '../../assets/editIcon.png';
 
 export default function Story({
   stories,
   categoryHeading,
   activeCategory,
   isSingleSlideViewed,
+  setOpenAddStoryModal,
 }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
   const { handleStoryViewModal } = useContext(SignedInContext);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editStory, setEditStory] = useState({});
 
   useEffect(() => {
     setSeeMoreToggled(false);
@@ -29,6 +35,7 @@ export default function Story({
                   (index < 4 || seeMoreToggled) && (
                     <div className='card' key={index}>
                       <img
+                        className='story-image'
                         onClick={() =>
                           handleStoryViewModal(
                             true,
@@ -69,16 +76,30 @@ export default function Story({
                   (index < 4 || seeMoreToggled) && (
                     <div className='card' key={index}>
                       <img
+                        className='story-image'
                         onClick={() => handleStoryViewModal(true, story._id)}
-                        src={story.slides[0].imageURL}
+                        src={story.slides && story.slides[0].imageURL}
                         alt=''
                       />
                       <div className='story-info'>
-                        <div className='heading'>{story.slides[0].heading}</div>
+                        <div className='heading'>
+                          {story.slides && story.slides[0].heading}
+                        </div>
                         <div className='description'>
-                          {story.slides[0].description}
+                          {story.slides && story.slides[0].description}
                         </div>
                       </div>
+                      <img
+                        className={`edit-icon  ${
+                          categoryHeading === 'Your Stories' ? '' : 'hide'
+                        }`}
+                        src={editIcon}
+                        alt=''
+                        onClick={() => {
+                          setIsEditMode(true);
+                          setEditStory(story);
+                        }}
+                      />
                     </div>
                   )
               )
@@ -95,6 +116,16 @@ export default function Story({
             </div>
           )}
         </div>
+      )}
+      {isEditMode && (
+        <AddStoryModal
+          openAddStoryModal={isEditMode}
+          setOpenAddStoryModal={setOpenAddStoryModal}
+          story={editStory}
+          isEditMode={isEditMode}
+          setIsEditMode={setIsEditMode}
+          setEditStory={setEditStory}
+        />
       )}
     </>
   );

@@ -30,7 +30,16 @@
 }
 
 .slide-navigators {
+  position: absolute;
   cursor: pointer;
+}
+
+.left-navigator {
+  left: 0%;
+}
+
+.right-navigator {
+  right: 0%;
 }
 
 .story-view-modal .story-info {
@@ -91,7 +100,9 @@
   }
 
   .slide-navigators {
-    display: none;
+    height: 70vh;
+    width: 50vw;
+    opacity: 0;
   }
 
   .story-view-modal {

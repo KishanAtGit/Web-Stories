@@ -22,7 +22,7 @@ export default function Homepage() {
   const [toggleHamburger, setToggleHamburger] = useState(false);
   const [openAddStoryModal, setOpenAddStoryModal] = useState(false);
   const [toggleBookmark, setToggleBookmark] = useState(false);
-  // const [isSingleSlideViewed, setIsSingleSlideViewed] = useState(false);
+  const [isSingleSlideViewed, setIsSingleSlideViewed] = useState(false);
   const {
     isSignedIn,
     storyViewModal,
@@ -71,12 +71,20 @@ export default function Homepage() {
 
   useEffect(() => {
     setActiveCategory([]);
-    !isSignedIn && setToggleBookmark(false);
+    !isSignedIn &&
+      (() => {
+        setYourBookmarks([]);
+        setToggleBookmark(false);
+      })();
 
     const getBookmarks = async () => {
       try {
-        const bookmarks = await getYourBookmarksAPI();
-        setYourBookmarks(bookmarks);
+        const res = await getYourBookmarksAPI();
+        if (res.status === 404) {
+          setYourBookmarks([]);
+        } else if (res.status === 200) {
+          setYourBookmarks(res.data);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -84,22 +92,9 @@ export default function Homepage() {
     isSignedIn && getBookmarks();
   }, [isSignedIn, storyUpdatedToggle]);
 
-  // useEffect(() => {
-  //   console.log(toggleBookmark, 'toggleBookmark is true inside useEffect');
-  //   console.log(isSignedIn, 'isSignedIn is true inside useEffect');
-
-  //   // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
-  //   setIsSingleSlideViewed(toggleBookmark);
-  //   // console.log(toggleBookmark, 'toggleBookmark');
-  //   // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
-  // });
-
-  // console.log(isSignedIn, 'isSignedIn');
-
-  // console.log(toggleBookmark, 'toggleBookmark');
-  // console.log(isSingleSlideViewed, 'isSingleSlideViewed');
-
-  // console.log(yourBookmarks, 'yourBookmarks');
+  useEffect(() => {
+    setIsSingleSlideViewed(toggleBookmark);
+  }, [toggleBookmark]);
 
   return (
     <div className='homepage'>
@@ -118,7 +113,7 @@ export default function Homepage() {
         />
       ) : (
         <Story
-          isSingleSlideViewed={toggleBookmark}
+          isSingleSlideViewed={isSingleSlideViewed}
           stories={yourBookmarks}
           categoryHeading={'Your Bookmarks'}
         />
@@ -129,6 +124,7 @@ export default function Homepage() {
           activeCategory={activeCategory}
           stories={allStories}
           yourStories={yourStories}
+          setOpenAddStoryModal={setOpenAddStoryModal}
         />
       )}
       {openRegisterModal && (
@@ -140,7 +136,7 @@ export default function Homepage() {
           onSuccess={handleRegisterSuccess}
         />
       )}
-      {openSignInModal && (
+      {(openSignInModal || (openSignInModal && storyViewModal)) && (
         <AuthModal
           openAuthModal={openSignInModal}
           setOpenAuthModal={setOpenSignInModal}
@@ -160,13 +156,14 @@ export default function Homepage() {
         <StoryViewModal
           storyViewModal={storyViewModal}
           story={
-            toggleBookmark
+            isSingleSlideViewed
               ? allStories.find(story => story._id === storyViewModal.storyId)
               : allStories.find(story => story._id === storyViewModal.storyId)
           }
           handleStoryViewModal={handleStoryViewModal}
-          isSingleSlideViewed={toggleBookmark}
+          isSingleSlideViewed={isSingleSlideViewed}
           yourBookmarks={yourBookmarks}
+          setOpenSignInModal={setOpenSignInModal}
         />
       )}
       {toggleHamburger && (

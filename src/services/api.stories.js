@@ -47,3 +47,17 @@ export const createStoryAPI = async storyData => {
     return error.response;
   }
 };
+
+export const editStoryAPI = async (storyId, storyData) => {
+  try {
+    const response = await apiClient.patch(`story/update/${storyId}`, {
+      ...storyData,
+    });
+    if (response.status === 200) {
+      notifyOnSuccess(response.data.message);
+    }
+    return response;
+  } catch (error) {
+    console.error('Error posting data:', error);
+  }
+};
