@@ -25,21 +25,25 @@ export default function AddStoryModal({
               heading: '',
               description: '',
               imageURL: '',
+              likes: 0,
             },
             {
               heading: '',
               description: '',
               imageURL: '',
+              likes: 0,
             },
             {
               heading: '',
               description: '',
               imageURL: '',
+              likes: 0,
             },
             {
               heading: '',
               description: '',
               imageURL: '',
+              likes: 0,
             },
           ],
         }
@@ -76,6 +80,7 @@ export default function AddStoryModal({
           heading: '',
           description: '',
           imageURL: '',
+          likes: 0,
         },
       ],
     }));

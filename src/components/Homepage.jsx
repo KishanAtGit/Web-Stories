@@ -96,6 +96,8 @@ export default function Homepage() {
     setIsSingleSlideViewed(toggleBookmark);
   }, [toggleBookmark]);
 
+  // console.log(allStories, 'allStories');
+
   return (
     <div className='homepage'>
       <Navbar

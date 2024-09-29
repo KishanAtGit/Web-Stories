@@ -91,6 +91,22 @@
   font-size: 1.3em;
 }
 
+.slide-tiles {
+  position: absolute;
+  top: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 18vw;
+  justify-content: space-between;
+}
+
+.slide-tiles > * {
+  /* width: fit-content; */
+  flex: 1 1 calc(18vw / 6);
+  /* width: calc(18vw / 6); */
+  /* box-sizing: border-box; */
+}
+
 @media only screen and (max-width: 450px) {
   .slide-view .slide-view-cross-icon {
     top: 6%;

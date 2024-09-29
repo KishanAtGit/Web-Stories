@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SlideForm({
@@ -13,7 +13,7 @@ export default function SlideForm({
     return handleSubmit(data => saveSlideData(data));
   }, []);
 
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit, setValue, setError, clearErrors } = useForm({
     defaultValues: {
       heading: selectedSlide.heading,
       description: selectedSlide.description,
@@ -21,6 +21,7 @@ export default function SlideForm({
       category: storyData.category,
     },
   });
+  const [videoError, setVideoError] = useState('');
 
   const saveSlideData = data => {
     setStoryData(prev => ({
@@ -48,6 +49,34 @@ export default function SlideForm({
     }));
   };
 
+  const checkVideoDuration = url => {
+    const video = document.createElement('video');
+    video.src = url;
+
+    video.onloadedmetadata = function () {
+      console.log(video.duration);
+
+      if (video.duration >= 16) {
+        setError('imageURL', {
+          type: 'manual',
+          message: 'Video duration exceeds 15 seconds',
+        });
+        setVideoError('Video duration exceeds 15 seconds');
+      } else {
+        clearErrors('imageURL');
+        setVideoError('');
+      }
+    };
+
+    video.onerror = function () {
+      setError('imageURL', {
+        type: 'manual',
+        message: 'Invalid video URL',
+      });
+      setVideoError('Invalid video URL');
+    };
+  };
+
   return (
     <div className='slide-form'>
       <div>
@@ -72,8 +101,22 @@ export default function SlideForm({
         <input
           type='text'
           placeholder='Add image or video url'
-          {...register('imageURL', { required: true })}
+          {...register('imageURL', {
+            required: 'Add image & video URL',
+            onChange: e => {
+              const url = e.target.value;
+
+              // Check if it's a video URL
+              if (/\.(mp4|webm|ogg)$/.test(url)) {
+                checkVideoDuration(url);
+              } else {
+                clearErrors('imageURL');
+                setVideoError(''); // Clear any previous video error
+              }
+            },
+          })}
         />
+        {videoError && <p style={{ color: 'red' }}>{videoError}</p>}
       </div>
       <div>
         <span>Category:</span>
