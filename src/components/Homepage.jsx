@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getStoriesAPI, getYourStoriesAPI } from '../services/api.stories';
 import { getYourBookmarksAPI } from '../services/api.bookmarks';
 import { SignedInContext } from '../App';
@@ -33,6 +34,16 @@ export default function Homepage() {
   const [allStories, setAllStories] = useState([]);
   const [yourStories, setYourStories] = useState([]);
   const [yourBookmarks, setYourBookmarks] = useState([]);
+
+  const location = useLocation();
+  const useQuery = () => {
+    return new URLSearchParams(location.search);
+  };
+  const query = useQuery();
+  const storyId = query.get('storyId');
+  const slideId = query.get('slideId');
+  const isShared = query.get('isShared');
+  console.log(storyId, slideId, isShared, 'storyId, slideId');
 
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
@@ -94,7 +105,10 @@ export default function Homepage() {
 
   useEffect(() => {
     setIsSingleSlideViewed(toggleBookmark);
-  }, [toggleBookmark]);
+    isShared &&
+      (setIsSingleSlideViewed(true),
+      handleStoryViewModal(true, storyId, slideId));
+  }, [toggleBookmark, isShared]);
 
   // console.log(allStories, 'allStories');
 
@@ -157,15 +171,13 @@ export default function Homepage() {
       {storyViewModal && (
         <StoryViewModal
           storyViewModal={storyViewModal}
-          story={
-            isSingleSlideViewed
-              ? allStories.find(story => story._id === storyViewModal.storyId)
-              : allStories.find(story => story._id === storyViewModal.storyId)
-          }
+          story={allStories.find(story => story._id === storyViewModal.storyId)}
           handleStoryViewModal={handleStoryViewModal}
           isSingleSlideViewed={isSingleSlideViewed}
           yourBookmarks={yourBookmarks}
           setOpenSignInModal={setOpenSignInModal}
+          setIsSingleSlideViewed={setIsSingleSlideViewed}
+          toggleBookmark={toggleBookmark}
         />
       )}
       {toggleHamburger && (

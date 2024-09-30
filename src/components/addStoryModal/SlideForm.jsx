@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SlideForm({
@@ -6,14 +6,18 @@ export default function SlideForm({
   setStoryData,
   selectedSlide,
   activeSlideIndex,
+  handleNextClick,
+  handlePreviousClick,
 }) {
-  useEffect(() => {
-    console.log('Mounting', activeSlideIndex + 1);
-
-    return handleSubmit(data => saveSlideData(data));
-  }, []);
-
-  const { register, handleSubmit, setValue, setError, clearErrors } = useForm({
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       heading: selectedSlide.heading,
       description: selectedSlide.description,
@@ -21,7 +25,15 @@ export default function SlideForm({
       category: storyData.category,
     },
   });
-  const [videoError, setVideoError] = useState('');
+
+  // useEffect(() => {
+  //   console.log('Mounting', activeSlideIndex + 1);
+
+  //   return handleSubmit(data => saveSlideData(data));
+  // }, []);
+
+  console.log(storyData, 'storyData');
+  console.log(selectedSlide, 'selectedSlide');
 
   const saveSlideData = data => {
     setStoryData(prev => ({
@@ -49,90 +61,148 @@ export default function SlideForm({
     }));
   };
 
-  const checkVideoDuration = url => {
-    const video = document.createElement('video');
-    video.src = url;
+  const checkVideoDuration = async url => {
+    const videoExtensions = ['mp4', 'mov', 'webm', 'avi', 'mkv'];
+    const extension = url.split('.').pop().split('?')[0]; // Get the file extension (ignoring query params)
 
-    video.onloadedmetadata = function () {
-      console.log(video.duration);
+    // If the URL is for a video
+    if (videoExtensions.includes(extension.toLowerCase())) {
+      const video = document.createElement('video');
+      video.src = url;
 
-      if (video.duration >= 16) {
+      video.onloadedmetadata = function () {
+        if (video.duration >= 16) {
+          setError('imageURL', {
+            type: 'manual',
+            message: 'Video duration exceeds 15 seconds',
+          });
+        } else {
+          clearErrors('imageURL');
+        }
+      };
+
+      video.onerror = function () {
         setError('imageURL', {
           type: 'manual',
-          message: 'Video duration exceeds 15 seconds',
+          message: 'Invalid video URL',
         });
-        setVideoError('Video duration exceeds 15 seconds');
-      } else {
-        clearErrors('imageURL');
-        setVideoError('');
-      }
-    };
-
-    video.onerror = function () {
-      setError('imageURL', {
-        type: 'manual',
-        message: 'Invalid video URL',
-      });
-      setVideoError('Invalid video URL');
-    };
+      };
+    } else {
+      clearErrors('imageURL');
+    }
   };
 
   return (
-    <div className='slide-form'>
+    <form className='slide-form' onSubmit={handleSubmit(saveSlideData)}>
       <div>
         <span>Heading:</span>
-        <input
-          type='text'
-          placeholder='Your heading'
-          {...register('heading', { required: true })}
-        />
+        <div className='inputs'>
+          <input
+            className={errors.heading ? 'error' : ''}
+            type='text'
+            placeholder='Your heading'
+            {...register('heading', {
+              required: '*Heading is required',
+              maxLength: {
+                value: 30,
+                message: 'Heading must be less than 30 characters',
+              },
+            })}
+          />
+          {errors.heading && (
+            <div className='error-message'>{errors.heading.message}</div>
+          )}
+        </div>
       </div>
       <div>
         <span>Description:</span>
-        <textarea
-          name=''
-          id=''
-          placeholder='Story Description'
-          {...register('description', { required: true })}
-        ></textarea>
+        <div className='inputs'>
+          <textarea
+            className={errors.description ? 'error' : ''}
+            placeholder='Story Description'
+            {...register('description', {
+              required: '*Description is required',
+              maxLength: {
+                value: 100,
+                message: 'Description must be less than 100 characters',
+              },
+            })}
+          ></textarea>
+          {errors.description && (
+            <div className='error-message'>{errors.description.message}</div>
+          )}
+        </div>
       </div>
       <div>
         <span>Image:</span>
-        <input
-          type='text'
-          placeholder='Add image or video url'
-          {...register('imageURL', {
-            required: 'Add image & video URL',
-            onChange: e => {
-              const url = e.target.value;
-
-              // Check if it's a video URL
-              if (/\.(mp4|webm|ogg)$/.test(url)) {
-                checkVideoDuration(url);
-              } else {
-                clearErrors('imageURL');
-                setVideoError(''); // Clear any previous video error
-              }
-            },
-          })}
-        />
-        {videoError && <p style={{ color: 'red' }}>{videoError}</p>}
+        <div>
+          <span>Image or Video:</span>
+          <div className='inputs'>
+            <input
+              className={errors.imageURL ? 'error' : ''}
+              type='text'
+              placeholder='Add image or video URL'
+              {...register('imageURL', {
+                required: '*Image or video URL is required',
+                onChange: e => {
+                  const url = e.target.value.trim(); // Trim any leading or trailing spaces
+                  if (/\.(mp4|webm|ogg|mov|avi|mkv)$/i.test(url)) {
+                    // Check video duration for video URLs
+                    checkVideoDuration(url);
+                  } else {
+                    // If it's an image or an invalid URL, we skip validation and clear errors
+                    clearErrors('imageURL');
+                    // setVideoError('');
+                  }
+                },
+              })}
+            />
+            {errors.imageURL && (
+              <div className='error-message'>{errors.imageURL.message}</div>
+            )}
+            {/* {videoError && <div className='error-message'>{videoError}</div>} */}
+          </div>
+        </div>
       </div>
+
       <div>
         <span>Category:</span>
-        <select
-          className='dropdown'
-          {...register('category', { required: true })}
-          onChange={handleCategorySelection}
-        >
-          <option value=''>Select category</option>
-          <option value='Food'>Food</option>
-          <option value='Health and Fitness'>Health and Fitness</option>
-          <option value='Travel'>Travel</option>
-          <option value='Movies'>Movies</option>
-          <option value='Education'>Education</option>
-        </select>
+        <div className='inputs'>
+          <select
+            className='dropdown'
+            {...register('category', { required: '*Select a Category' })}
+            onChange={handleCategorySelection}
+          >
+            <option value=''>Select category</option>
+            <option value='Food'>Food</option>
+            <option value='Health and Fitness'>Health and Fitness</option>
+            <option value='Travel'>Travel</option>
+            <option value='Movies'>Movies</option>
+            <option value='Education'>Education</option>
+          </select>
+          {errors.category && (
+            <div className='error-message'>{errors.category.message}</div>
+          )}
+        </div>
       </div>
-    </div>
+      {/* <button type='submit'>Save Slide</button> */}
+      <div className='slide-navigator-buttons'>
+        <div
+          className={`previous-button button ${selectedSlide === 0 && 'hide'}`}
+          onClick={handlePreviousClick}
+        >
+          Previous
+        </div>
+        <div
+          type='submit'
+          className={`next-button button ${
+            selectedSlide === storyData.slides.length - 1 && 'hide'
+          } `}
+          onClick={handleNextClick}
+        >
+          Next
+        </div>
+      </div>
+    </form>
   );
 }

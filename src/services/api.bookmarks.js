@@ -1,4 +1,4 @@
-import apiClient, { notifyOnSuccess, notifyOnFail } from '../axios.config';
+import apiClient, { notifyOnFail } from '../axios.config';
 
 export const getYourBookmarksAPI = async () => {
   const userId = localStorage.getItem('userId'); // get userId from localStorage with each request to avoid a null request call`

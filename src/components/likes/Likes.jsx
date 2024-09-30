@@ -8,10 +8,6 @@ export default function Likes({ storyId, currentSlide, setOpenSignInModal }) {
   const [isLiked, setIsLiked] = useState(false);
   const { isSignedIn, setStoryUpdatedToggle } = useContext(SignedInContext);
 
-  // console.log(currentSlide.likes, 'currentSlide.Likes');
-
-  // console.log(currentSlide, 'currentSlide');
-
   const handleLikeClick = async () => {
     if (!isSignedIn) {
       setOpenSignInModal(true);

@@ -173,34 +173,19 @@ export default function AddStoryModal({
           setStoryData={setStoryData}
           selectedSlide={storyData.slides[selectedSlide]}
           activeSlideIndex={selectedSlide}
+          handleNextClick={handleNextClick}
+          handlePreviousClick={handlePreviousClick}
         />
       </div>
-      <div className='add-story-buttons'>
-        <div className='slide-navigator-buttons'>
-          <div
-            className={`previous-button button ${
-              selectedSlide === 0 && 'hide'
-            }`}
-            onClick={handlePreviousClick}
-          >
-            Previous
-          </div>
-          <div
-            className={`next-button button ${
-              selectedSlide === storyData.slides.length - 1 && 'hide'
-            } `}
-            onClick={handleNextClick}
-          >
-            Next
-          </div>
-        </div>
-        <div
-          className='post-button button'
-          onClick={isEditMode ? handleUpdateStory : handleCreateStory}
-        >
-          Post
-        </div>
+      {/* <div className='add-story-buttons'> */}
+
+      <div
+        className='post-button button'
+        onClick={isEditMode ? handleUpdateStory : handleCreateStory}
+      >
+        Post
       </div>
+      {/* </div> */}
     </Modal>
   );
 }

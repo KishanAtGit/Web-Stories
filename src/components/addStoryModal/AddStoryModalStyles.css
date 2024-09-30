@@ -76,6 +76,7 @@
   display: flex;
   flex-direction: column;
   gap: 2vh;
+  /* position: absolute; */
 }
 .slide-form > div {
   margin-left: 2vw;
@@ -84,20 +85,25 @@
   width: 75%;
 }
 
-.slide-form input,
-.slide-form textarea {
+.slide-form .inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-form .inputs input,
+.slide-form .inputs textarea {
   width: 15vw;
   height: 2.8vh;
   border: 2px solid black;
   padding: 0.5em;
   font-size: 0.9em;
 }
-.slide-form textarea {
+.slide-form .inputs textarea {
   height: 12vh;
   resize: none;
   overflow: auto;
 }
-.slide-form .dropdown {
+.slide-form .inputs .dropdown {
   padding: 0.3em;
   width: 16.2vw;
   height: 4.7vh;
@@ -107,6 +113,33 @@
 
 ::placeholder {
   font-size: 0.9em;
+}
+
+.slide-form .inputs .error-message {
+  color: red;
+  font-size: 0.5em;
+}
+
+.slide-form .inputs .error {
+  border: 1px solid red;
+  color: red;
+}
+
+.slide-form .inputs .error::placeholder {
+  color: red;
+}
+
+.slide-form .slide-navigator-buttons {
+  position: absolute;
+  bottom: 3%;
+  left: 2%;
+}
+
+.slide-form .slide-navigator-buttons {
+  display: flex;
+  gap: 1vw;
+  margin-left: 2vw;
+  width: 20vw;
 }
 
 .add-story-buttons {
@@ -124,13 +157,10 @@
   width: 5vw;
 }
 
-.slide-navigator-buttons {
-  display: flex;
-  gap: 2vw;
-  margin-left: 2vw;
-}
-
 .post-button {
+  position: absolute;
+  right: 2%;
+  bottom: 3%;
   background-color: #ff7373;
   width: 5vw;
 }

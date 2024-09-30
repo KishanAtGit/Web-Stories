@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SignedInContext } from '../../App';
 import Bookmark from '../bookmark/Bookmark';
 import Likes from '../likes/Likes';
@@ -7,6 +8,7 @@ import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
 import storyViewRightIcon from '../../assets/story-view-right-icon.png';
 import slideViewCrossIcon from '../../assets/slide-view-cross-icon.png';
 import SlideTiles from '../../slideTiles/SlideTiles';
+import ShareIcon from '../ShareIcon';
 import './StoryViewModalStyles.css';
 
 export default function StoryViewModal({
@@ -16,8 +18,12 @@ export default function StoryViewModal({
   isSingleSlideViewed,
   yourBookmarks,
   setOpenSignInModal,
+  setIsSingleSlideViewed,
+  toggleBookmark,
 }) {
   if (!story) return null;
+
+  const navigate = useNavigate();
 
   const [currentSlide, setCurrentSlide] = useState(
     isSingleSlideViewed
@@ -27,6 +33,17 @@ export default function StoryViewModal({
 
   const { customModalStyles } = useContext(SignedInContext);
 
+  const removeQueryParams = () => {
+    // Get the current URL
+    const url = new URL(window.location.href);
+
+    // Set the search (query string) to an empty string
+    url.search = '';
+
+    // Update the URL in the browser without reloading the page
+    window.history.replaceState({}, document.title, url);
+  };
+
   const handleNextClick = () => {
     setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
   };
@@ -34,7 +51,7 @@ export default function StoryViewModal({
     setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) - 1]);
   };
 
-  console.log(story.slides[0], 'story');
+  // console.log(story, 'story');
   // console.log(currentSlide, 'currentSlide-viewModel');
 
   useEffect(() => {
@@ -50,7 +67,11 @@ export default function StoryViewModal({
       style={customModalStyles}
       className='story-view-modal'
       isOpen={storyViewModal.openModal}
-      onRequestClose={() => handleStoryViewModal(false, null, null)}
+      onRequestClose={() => {
+        !toggleBookmark && setIsSingleSlideViewed(false);
+        handleStoryViewModal(false, null, null);
+        navigate('/');
+      }}
       ariaHideApp={false}
     >
       <div className='slide-view'>
@@ -77,12 +98,17 @@ export default function StoryViewModal({
           className='slide-view-cross-icon'
           src={slideViewCrossIcon}
           alt='crossIcon'
-          onClick={() => handleStoryViewModal(false, null)}
+          onClick={() => {
+            !toggleBookmark && setIsSingleSlideViewed(false);
+            handleStoryViewModal(false, null);
+            navigate('/');
+          }}
         />
         <div className='story-info'>
           <div className='heading'>{currentSlide.heading}</div>
           <div className='description'>{currentSlide.description}</div>
         </div>
+        <ShareIcon storyId={story._id} slideId={currentSlide._id} />
         <Bookmark
           key={currentSlide._id + 'bookmark'}
           isPreBookmarked={yourBookmarks.some(
