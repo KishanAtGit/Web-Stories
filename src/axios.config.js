@@ -2,8 +2,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const apiClient = axios.create({
-  //baseURL: 'http://localhost:3000/api/',
-  baseURL: 'https://web-stories-backend.onrender.com/api/',
+  baseURL: 'http://localhost:3000/api/',
+  // baseURL: 'https://web-stories-backend.onrender.com/api/',
 });
 
 apiClient.interceptors.request.use(
