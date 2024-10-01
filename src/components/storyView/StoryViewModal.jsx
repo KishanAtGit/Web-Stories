@@ -95,7 +95,10 @@ export default function StoryViewModal({
           />
         )}
         <img
-          className='slide-view-cross-icon'
+          className={`slide-view-cross-icon ${
+            isSingleSlideViewed ? 'view-in-single-slideMode' : ''
+          }`}
+          style={{ top: isSingleSlideViewed ? '5%' : '' }}
           src={slideViewCrossIcon}
           alt='crossIcon'
           onClick={() => {
@@ -104,11 +107,15 @@ export default function StoryViewModal({
             navigate('/');
           }}
         />
+        <ShareIcon
+          storyId={story._id}
+          slideId={currentSlide._id}
+          isSingleSlideViewed={isSingleSlideViewed}
+        />
         <div className='story-info'>
           <div className='heading'>{currentSlide.heading}</div>
           <div className='description'>{currentSlide.description}</div>
         </div>
-        <ShareIcon storyId={story._id} slideId={currentSlide._id} />
         <Bookmark
           key={currentSlide._id + 'bookmark'}
           isPreBookmarked={yourBookmarks.some(
