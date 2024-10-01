@@ -21,6 +21,12 @@ export default function Story({
     setSeeMoreToggled(false);
   }, [activeCategory]);
 
+  const isVideo = url => {
+    const videoExtensions = ['mp4', 'webm', 'ogg']; // Add more if needed
+    const extension = url.split('.').pop();
+    return videoExtensions.includes(extension);
+  };
+
   return (
     <>
       {isSingleSlideViewed ? (
@@ -44,7 +50,11 @@ export default function Story({
                             slide.slideId
                           )
                         }
-                        src={slide.imageURL}
+                        src={
+                          isVideo(slide.imageURL)
+                            ? 'https://plus.unsplash.com/premium_photo-1683936164203-b8b814f2e3a6?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                            : slide.imageURL
+                        }
                         alt=''
                       />
                       <div className='story-info'>
@@ -89,8 +99,12 @@ export default function Story({
                       <img
                         className='story-image'
                         onClick={() => handleStoryViewModal(true, story._id)}
-                        src={story.slides && story.slides[0].imageURL}
-                        alt=''
+                        src={
+                          story.slides && isVideo(story.slides[0].imageURL)
+                            ? 'https://plus.unsplash.com/premium_photo-1683936164203-b8b814f2e3a6?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                            : story.slides && story.slides[0].imageURL
+                        }
+                        alt='Story Media'
                       />
                       <div className='story-info'>
                         <div className='heading'>

@@ -163,12 +163,13 @@
   width: 5vw;
 }
 
-.post-button {
+.slide-form .post-button {
   position: absolute;
   right: 5%;
   bottom: 5%;
   background-color: #ff7373;
   width: 5vw;
+  font-size: 0.7em;
 }
 
 @media only screen and (min-width: 450px) {

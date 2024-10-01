@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import categories from '../../constant/categories';
 
 export default function SlideForm({
   storyData,
@@ -7,6 +8,9 @@ export default function SlideForm({
   activeSlideIndex,
   handleNextClick,
   handlePreviousClick,
+  isEditMode,
+  handleUpdateStory,
+  handleCreateStory,
 }) {
   const {
     register,
@@ -26,7 +30,6 @@ export default function SlideForm({
   });
 
   console.log(storyData, 'storyData');
-  console.log(selectedSlide, 'selectedSlide');
 
   const saveSlideData = data => {
     setStoryData(prev => ({
@@ -38,6 +41,34 @@ export default function SlideForm({
             heading: data.heading,
             description: data.description,
             imageURL: data.imageURL,
+          };
+        }
+        return slide;
+      }),
+    }));
+    activeSlideIndex < storyData.slides.length - 1 && handleNextClick();
+  };
+
+  const handleFinaleData = () => {
+    const lastSlideData = getValues();
+    saveSlideData(lastSlideData);
+    const postData = {
+      ...storyData,
+      slides: [...storyData.slides.slice(0, -1), lastSlideData],
+    };
+
+    handleCreateStory(postData);
+  };
+
+  const handleHeadingChange = event => {
+    setValue('heading', event.target.value);
+    setStoryData(prev => ({
+      ...prev,
+      slides: prev.slides.map((slide, index) => {
+        if (index === activeSlideIndex) {
+          return {
+            ...slide,
+            heading: event.target.value,
           };
         }
         return slide;
@@ -101,6 +132,7 @@ export default function SlideForm({
                 message: 'Heading must be less than 30 characters',
               },
             })}
+            onChange={handleHeadingChange}
           />
           {errors.heading && (
             <div className='error-message'>{errors.heading.message}</div>
@@ -186,15 +218,21 @@ export default function SlideForm({
         >
           Previous
         </div>
-        <div
+        <button
           type='submit'
           className={`next-button button ${
             selectedSlide === storyData.slides.length - 1 && 'hide'
           } `}
-          onClick={handleNextClick}
+          // onClick={handleNextClick()}
         >
           Next
-        </div>
+        </button>
+      </div>
+      <div
+        className='post-button button'
+        onClick={isEditMode ? handleUpdateStory : handleFinaleData}
+      >
+        Post
       </div>
     </form>
   );

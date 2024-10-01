@@ -98,7 +98,7 @@ export default function AddStoryModal({
     }
   };
 
-  const handleCreateStory = async () => {
+  const handleCreateStory = async storyData => {
     const res = await createStoryAPI(storyData);
     if (res.status === 201) {
       setStoryUpdatedToggle(prev => !prev);
@@ -175,13 +175,10 @@ export default function AddStoryModal({
           activeSlideIndex={selectedSlide}
           handleNextClick={handleNextClick}
           handlePreviousClick={handlePreviousClick}
+          isEditMode={isEditMode}
+          handleUpdateStory={handleUpdateStory}
+          handleCreateStory={handleCreateStory}
         />
-      </div>
-      <div
-        className='post-button button'
-        onClick={isEditMode ? handleUpdateStory : handleCreateStory}
-      >
-        Post
       </div>
     </Modal>
   );
