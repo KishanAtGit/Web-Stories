@@ -23,7 +23,7 @@
 .slide-view .slide-view-cross-icon {
   position: absolute;
   top: 8%;
-  left: 6%;
+  left: 5%;
   height: 2.2vh;
   width: 1vw;
   cursor: pointer;
@@ -146,6 +146,18 @@
     width: 100vw;
     height: 93vh;
     object-fit: cover;
+  }
+
+  .slide-tiles {
+    top: 5%;
+    width: 90vw;
+  }
+
+  .slide-tiles > * {
+    /* width: fit-content; */
+    flex: 1 1 calc(90vw / 6);
+    /* width: calc(90vw / 6); */
+    /* box-sizing: border-box; */
   }
 
   .story-view-modal .story-info {
