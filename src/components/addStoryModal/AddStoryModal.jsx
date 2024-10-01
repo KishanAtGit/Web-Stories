@@ -177,15 +177,12 @@ export default function AddStoryModal({
           handlePreviousClick={handlePreviousClick}
         />
       </div>
-      {/* <div className='add-story-buttons'> */}
-
       <div
         className='post-button button'
         onClick={isEditMode ? handleUpdateStory : handleCreateStory}
       >
         Post
       </div>
-      {/* </div> */}
     </Modal>
   );
 }

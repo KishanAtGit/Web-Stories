@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SlideForm({
@@ -25,12 +24,6 @@ export default function SlideForm({
       category: storyData.category,
     },
   });
-
-  // useEffect(() => {
-  //   console.log('Mounting', activeSlideIndex + 1);
-
-  //   return handleSubmit(data => saveSlideData(data));
-  // }, []);
 
   console.log(storyData, 'storyData');
   console.log(selectedSlide, 'selectedSlide');
@@ -134,9 +127,9 @@ export default function SlideForm({
         </div>
       </div>
       <div>
-        <span>Image:</span>
+        <span className='image-label'>Image:</span>
+        <span className='image-video-label'>Image & Video:</span>
         <div>
-          <span>Image or Video:</span>
           <div className='inputs'>
             <input
               className={errors.imageURL ? 'error' : ''}
@@ -160,11 +153,9 @@ export default function SlideForm({
             {errors.imageURL && (
               <div className='error-message'>{errors.imageURL.message}</div>
             )}
-            {/* {videoError && <div className='error-message'>{videoError}</div>} */}
           </div>
         </div>
       </div>
-
       <div>
         <span>Category:</span>
         <div className='inputs'>
@@ -184,8 +175,10 @@ export default function SlideForm({
             <div className='error-message'>{errors.category.message}</div>
           )}
         </div>
+        <span className='category-hint'>
+          This field will be common for all slides
+        </span>
       </div>
-      {/* <button type='submit'>Save Slide</button> */}
       <div className='slide-navigator-buttons'>
         <div
           className={`previous-button button ${selectedSlide === 0 && 'hide'}`}

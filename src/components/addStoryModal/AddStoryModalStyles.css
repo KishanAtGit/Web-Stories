@@ -8,7 +8,7 @@
   border-radius: 1.5em;
   outline: none;
   min-width: 35vw;
-  min-height: 55vh;
+  min-height: 68vh;
   font-weight: 500;
   display: flex;
   flex-direction: column;
@@ -76,8 +76,10 @@
   display: flex;
   flex-direction: column;
   gap: 2vh;
-  /* position: absolute; */
+  margin-top: 0;
+  margin-bottom: 0;
 }
+
 .slide-form > div {
   margin-left: 2vw;
   display: flex;
@@ -111,6 +113,18 @@
   font-size: 0.9em;
 }
 
+.slide-form .category-hint {
+  position: absolute;
+  font-size: 0.5em;
+  width: 6vw;
+  right: 5%;
+  bottom: 18%;
+}
+
+.slide-form .image-video-label {
+  display: none;
+}
+
 ::placeholder {
   font-size: 0.9em;
 }
@@ -131,20 +145,12 @@
 
 .slide-form .slide-navigator-buttons {
   position: absolute;
-  bottom: 3%;
+  bottom: 5%;
   left: 2%;
-}
-
-.slide-form .slide-navigator-buttons {
   display: flex;
   gap: 1vw;
-  margin-left: 2vw;
-  width: 20vw;
-}
-
-.add-story-buttons {
-  display: flex;
-  justify-content: space-between;
+  width: 14vw;
+  font-size: 0.6em;
 }
 
 .previous-button {
@@ -159,8 +165,8 @@
 
 .post-button {
   position: absolute;
-  right: 2%;
-  bottom: 3%;
+  right: 5%;
+  bottom: 5%;
   background-color: #ff7373;
   width: 5vw;
 }
@@ -178,7 +184,9 @@
 
 @media only screen and (max-width: 450px) {
   .add-Story-modal {
-    width: 60vw;
+    width: 65vw;
+    min-height: 55vh;
+    gap: 2vh;
   }
 
   .add-Story-modal .cross-icon {
@@ -199,6 +207,7 @@
 
   .slides {
     flex-direction: row;
+    gap: 2vw;
   }
 
   .slide-buttons {
@@ -221,35 +230,49 @@
     width: 2.3vw;
   }
 
-  .slide-form > div {
-    flex-direction: column;
+  .slide-form {
+    gap: 3vh;
   }
 
-  .slide-form input,
-  .slide-form textarea {
-    width: 35vw;
+  .slide-form > div {
+    flex-direction: column;
+    width: fit-content;
+  }
+
+  .slide-form .inputs input,
+  .slide-form .inputs textarea {
+    width: 43vw;
     height: 2vh;
     padding: 0.3em;
   }
 
-  .slide-form textarea {
+  .slide-form .inputs textarea {
     height: 12vh;
   }
 
-  .slide-form .dropdown {
-    width: 38vw;
+  .slide-form .category-hint {
+    display: none;
+  }
+
+  .slide-form .inputs .dropdown {
+    width: 46vw;
     height: 3.8vh;
   }
 
-  .add-story-buttons {
-    justify-content: center;
+  .slide-form .image-label {
+    display: none;
+  }
+  .slide-form .image-video-label {
+    display: block;
   }
 
-  .slide-navigator-buttons {
+  .slide-form .slide-navigator-buttons {
     display: none;
   }
 
   .post-button {
+    right: 37%;
+    bottom: 3%;
     width: 14vw;
   }
 }
