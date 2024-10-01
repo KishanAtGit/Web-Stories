@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { SignedInContext } from '../App';
-import bookmarkIcon from '../assets/bookmarkIcon.svg';
-import profileIcon from '../assets/profileIcon.png';
+import bookmarkIcon from '../assets/bookmarkIcon.png';
+import profileIcon from '../assets/profileIcon.jpeg';
 
 export default function UserProfile({
   setToggleHamburger,
@@ -68,16 +68,10 @@ export default function UserProfile({
         </>
       ) : (
         <>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '5vw',
-            }}
-          >
+          <div className='profile-container '>
             <div className='profile-icon'>
               <img
-                style={{ width: '7vw' }}
+                style={{ width: '15vw' }}
                 src={profileIcon}
                 alt='profile-icon'
               />

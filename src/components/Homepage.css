@@ -28,7 +28,7 @@
 }
 
 .profile .profile-name {
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: 600;
 }
 
@@ -43,9 +43,10 @@
 
 .navbar .bookmarks-button {
   width: 5.5vw;
+  gap: 0.2vw;
 }
 .navbar .bookmarks-button img {
-  width: 1.4vw;
+  width: 0.9vw;
   height: 2.5vh;
 }
 
@@ -111,6 +112,17 @@
   .profile {
     width: 100vw;
     height: 31vh;
+    justify-content: flex-start;
+    gap: 1.8vh;
+  }
+
+  .profile .profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40vw;
+    margin-right: 23vw;
+    margin-top: 1vh;
   }
 
   .sign-in,
@@ -131,8 +143,9 @@
     height: 2.2vh;
   }
 
-  .profile-name {
-    font-size: 1.7em;
+  .profile .profile-name {
+    font-size: 1.8em;
+    font-weight: 700;
   }
 }
 

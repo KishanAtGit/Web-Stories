@@ -20,7 +20,7 @@ export default function Categories({
         }}
       >
         <img src={allCategoryImage} alt='all' />
-        <span className='category-name'>All</span>
+        {/* <span className='category-name'>All</span> */}
       </div>
       {categories.map(category => (
         <div
@@ -45,7 +45,7 @@ export default function Categories({
           }}
         >
           <img src={category.image} alt='all' />
-          <span className='category-name'>{category.name}</span>
+          {/* <span className='category-name'>{category.name}</span> */}
         </div>
       ))}
     </div>

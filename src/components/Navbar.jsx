@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { SignedInContext } from '../App';
-import bookmarkIcon from '../assets/bookmarkIcon.svg';
-import profileIcon from '../assets/profileIcon.png';
+import bookmarkIcon from '../assets/bookmarkIcon.png';
+import profileIcon from '../assets/profileIcon.jpeg';
 import hamburger from '../assets/hamburger.png';
 
 export default function Navbar({

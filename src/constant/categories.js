@@ -1,7 +1,7 @@
-import foodImage from '../assets/food.jpeg';
+import foodImage from '../assets/food.webp';
 import fitnessImage from '../assets/healthAndFitness.jpeg';
 import travel from '../assets/travel.jpeg';
-import movies from '../assets/movies.jpeg';
+import movies from '../assets/movie.jpeg';
 import education from '../assets/education.jpeg';
 
 const categories = [
