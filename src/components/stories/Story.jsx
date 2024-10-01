@@ -12,7 +12,7 @@ export default function Story({
   setOpenAddStoryModal,
 }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
-  const { handleStoryViewModal } = useContext(SignedInContext);
+  const { storyViewModal, handleStoryViewModal } = useContext(SignedInContext);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editStory, setEditStory] = useState({});
 
@@ -25,7 +25,7 @@ export default function Story({
       {isSingleSlideViewed ? (
         <div
           style={{ marginTop: '4vh', marginBottom: '4vh' }}
-          className='stories'
+          className={`stories ${storyViewModal.openModal ? 'hide' : ''}`}
         >
           <div className='story-heading'>{categoryHeading}</div>
           <div className={stories.length === 0 ? 'no-stories' : 'story-cards'}>
@@ -67,7 +67,7 @@ export default function Story({
           )}
         </div>
       ) : (
-        <div className='stories'>
+        <div className={`stories ${storyViewModal.openModal ? 'hide' : ''}`}>
           <div className='story-heading'>{categoryHeading}</div>
           <div className={stories.length === 0 ? 'no-stories' : 'story-cards'}>
             {stories.length > 0 ? (
