@@ -68,7 +68,7 @@ export default function UserProfile({
         </>
       ) : (
         <>
-          <div className='profile-container '>
+          <div className='profile-container'>
             <div className='profile-icon'>
               <img
                 style={{ width: '15vw' }}

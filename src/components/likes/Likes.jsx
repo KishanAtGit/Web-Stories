@@ -36,8 +36,8 @@ export default function Likes({ storyId, currentSlide, setOpenSignInModal }) {
       }
     };
 
-    checkLiked();
-  }, [isLiked]);
+    isSignedIn && checkLiked();
+  }, [isLiked, isSignedIn]);
 
   return (
     <div onClick={handleLikeClick} className='likes'>

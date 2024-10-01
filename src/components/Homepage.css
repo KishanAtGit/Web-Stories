@@ -112,7 +112,7 @@
   .profile {
     width: 100vw;
     height: 33vh;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 1.8vh;
   }
 
@@ -122,7 +122,6 @@
     justify-content: space-between;
     width: 40vw;
     margin-right: 23vw;
-    margin-top: 1vh;
   }
 
   .sign-in,
