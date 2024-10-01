@@ -30,7 +30,6 @@ export default function Likes({ storyId, currentSlide, setOpenSignInModal }) {
         const res = await checkLikesAPI(currentSlide._id);
         if (res.status === 200) {
           setIsLiked(res.data.liked);
-          console.log(res.data, 'res.data');
         }
       } catch (error) {
         console.log(error);

@@ -29,6 +29,7 @@ export default function Homepage() {
     storyViewModal,
     handleStoryViewModal,
     storyUpdatedToggle,
+    setYourStoriesInMobileView,
   } = useContext(SignedInContext);
 
   const [allStories, setAllStories] = useState([]);
@@ -43,7 +44,6 @@ export default function Homepage() {
   const storyId = query.get('storyId');
   const slideId = query.get('slideId');
   const isShared = query.get('isShared');
-  console.log(storyId, slideId, isShared, 'storyId, slideId');
 
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
@@ -86,6 +86,7 @@ export default function Homepage() {
       (() => {
         setYourBookmarks([]);
         setToggleBookmark(false);
+        setYourStoriesInMobileView(false);
       })();
 
     const getBookmarks = async () => {

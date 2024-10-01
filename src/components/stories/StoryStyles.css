@@ -74,7 +74,8 @@
 
 @media only screen and (max-width: 450px) {
   .stories-section {
-    margin-top: 2vh;
+    margin-top: 3vh;
+    margin-bottom: 4vh;
     gap: 3vh;
   }
 
@@ -110,14 +111,25 @@
 
   .story-cards .card .edit-icon {
     bottom: -1%;
-    left: 38%;
+    left: 37%;
     height: 10vw;
     width: 10vh;
+  }
+
+  .stories-hide-mobile {
+    display: none;
   }
 }
 
 .show-more {
   background-color: #ff7373;
+}
+
+@media only screen and (max-width: 450px) {
+  .show-more {
+    width: 15vw;
+    font-size: 1.4em;
+  }
 }
 
 .no-stories {

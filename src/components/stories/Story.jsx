@@ -12,7 +12,8 @@ export default function Story({
   setOpenAddStoryModal,
 }) {
   const [seeMoreToggled, setSeeMoreToggled] = useState(false);
-  const { storyViewModal, handleStoryViewModal } = useContext(SignedInContext);
+  const { storyViewModal, handleStoryViewModal, yourStoriesInMobileView } =
+    useContext(SignedInContext);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editStory, setEditStory] = useState({});
 
@@ -67,7 +68,17 @@ export default function Story({
           )}
         </div>
       ) : (
-        <div className={`stories ${storyViewModal.openModal ? 'hide' : ''}`}>
+        <div
+          className={`stories ${
+            categoryHeading === 'Your Stories'
+              ? yourStoriesInMobileView === false
+                ? 'stories-hide-mobile'
+                : ''
+              : yourStoriesInMobileView === true
+              ? 'stories-hide-mobile'
+              : ''
+          } ${storyViewModal.openModal ? 'hide' : ''}`}
+        >
           <div className='story-heading'>{categoryHeading}</div>
           <div className={stories.length === 0 ? 'no-stories' : 'story-cards'}>
             {stories.length > 0 ? (

@@ -10,7 +10,8 @@ export default function UserProfile({
   setOpenAddStoryModal,
   setToggleBookmark,
 }) {
-  const { isSignedIn, setIsSignedIn } = useContext(SignedInContext);
+  const { isSignedIn, setIsSignedIn, setYourStoriesInMobileView } =
+    useContext(SignedInContext);
   const username = localStorage.getItem('username');
 
   useEffect(() => {
@@ -83,7 +84,15 @@ export default function UserProfile({
             </div>
             <div className='profile-name'>{username}</div>
           </div>
-          <div className='your-story-button button'>Your Story</div>
+          <div
+            onClick={() => {
+              setYourStoriesInMobileView(prev => !prev);
+              setToggleBookmark(false);
+            }}
+            className='your-story-button button'
+          >
+            Your Story
+          </div>
           <div
             className='add-story-button button'
             onClick={() => setOpenAddStoryModal(true)}
@@ -91,7 +100,10 @@ export default function UserProfile({
             Add Story
           </div>
           <div
-            onClick={() => setToggleBookmark(prev => !prev)}
+            onClick={() => {
+              setToggleBookmark(prev => !prev);
+              setYourStoriesInMobileView(false);
+            }}
             className='bookmarks-button button'
           >
             <img src={bookmarkIcon} alt='icon' />

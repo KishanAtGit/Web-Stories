@@ -23,6 +23,8 @@ export default function App() {
     setStoryViewModal(prev => ({ ...prev, openModal, storyId, slideId }));
   };
 
+  const [yourStoriesInMobileView, setYourStoriesInMobileView] = useState(false);
+
   const customModalStyles = {
     overlay: {
       backgroundColor: '#000000E5',
@@ -49,6 +51,8 @@ export default function App() {
                   storyUpdatedToggle,
                   setStoryUpdatedToggle,
                   customModalStyles,
+                  yourStoriesInMobileView,
+                  setYourStoriesInMobileView,
                 }}
               >
                 <Homepage />
