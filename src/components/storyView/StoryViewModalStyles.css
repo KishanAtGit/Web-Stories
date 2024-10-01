@@ -23,7 +23,7 @@
 .slide-view .slide-view-cross-icon {
   position: absolute;
   top: 8%;
-  left: 5%;
+  left: 7%;
   height: 2.2vh;
   width: 1vw;
   cursor: pointer;
@@ -32,7 +32,7 @@
 .slide-view .share-icon {
   position: absolute;
   top: 8%;
-  right: 5%;
+  right: 7%;
   height: 2.7vh;
   width: 1.3vw;
   cursor: pointer;
@@ -118,13 +118,13 @@
 
 @media only screen and (max-width: 450px) {
   .slide-view .slide-view-cross-icon {
-    top: 6%;
+    top: 5%;
     height: 2.8vh;
     width: 6.4vw;
   }
 
   .slide-view .share-icon {
-    top: 6%;
+    top: 5%;
     height: 3.5vh;
     width: 8vw;
   }
@@ -144,7 +144,7 @@
     border-radius: 0;
     box-shadow: none;
     width: 100vw;
-    height: 94vh;
+    height: 93vh;
     object-fit: cover;
   }
 
@@ -165,13 +165,13 @@
   }
 
   .story-view-modal .bookmark {
-    bottom: 3%;
+    bottom: 5%;
     height: 4.7vh;
     width: 8vw;
   }
 
   .story-view-modal .likes {
-    bottom: 3%;
+    bottom: 5%;
     gap: 1.5vw;
   }
 
