@@ -118,13 +118,13 @@
 
 @media only screen and (max-width: 450px) {
   .slide-view .slide-view-cross-icon {
-    top: 6%;
+    top: 7%;
     height: 2.8vh;
     width: 6.4vw;
   }
 
   .slide-view .share-icon {
-    top: 6%;
+    top: 7%;
     height: 3.5vh;
     width: 8vw;
   }
@@ -149,7 +149,7 @@
   }
 
   .slide-tiles {
-    top: 7%;
+    top: 8%;
     width: 90vw;
   }
 
