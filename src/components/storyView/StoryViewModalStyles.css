@@ -118,13 +118,13 @@
 
 @media only screen and (max-width: 450px) {
   .slide-view .slide-view-cross-icon {
-    top: 7%;
+    top: 8%;
     height: 2.8vh;
     width: 6.4vw;
   }
 
   .slide-view .share-icon {
-    top: 7%;
+    top: 8%;
     height: 3.5vh;
     width: 8vw;
   }
@@ -178,8 +178,8 @@
 
   .story-view-modal .bookmark {
     bottom: 5%;
-    height: 4.7vh;
-    width: 8vw;
+    height: 4.5vh;
+    width: 7.8vw;
   }
 
   .story-view-modal .likes {
@@ -188,8 +188,8 @@
   }
 
   .story-view-modal .likes img {
-    height: 5vh;
-    width: 11vw;
+    height: 4.5vh;
+    width: 10vw;
   }
 
   .story-view-modal .likes-count {
