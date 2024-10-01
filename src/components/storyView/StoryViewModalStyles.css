@@ -141,8 +141,10 @@
   }
 
   .slide-view .story-slide {
+    border-radius: 0;
+    box-shadow: none;
     width: 100vw;
-    height: 100vh;
+    height: 94vh;
     object-fit: cover;
   }
 
