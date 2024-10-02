@@ -72,7 +72,7 @@ export default function StoryViewModal({
           <video
             className='story-slide'
             src={currentSlide.imageURL}
-            controls
+            controls={false}
             autoPlay
             loop
             muted
@@ -117,10 +117,12 @@ export default function StoryViewModal({
           currentSlide={currentSlide}
           setOpenSignInModal={setOpenSignInModal}
         />
-        <DownloadIcon
-          key={currentSlide._id + 'download'}
-          imageUrl={currentSlide.imageURL}
-        />
+        {!/\.(mp4|webm|ogg)$/.test(currentSlide.imageURL) && (
+          <DownloadIcon
+            key={currentSlide._id + 'download'}
+            imageUrl={currentSlide.imageURL}
+          />
+        )}
         <LikesIcon
           key={currentSlide._id + 'likes'}
           storyId={story._id}
