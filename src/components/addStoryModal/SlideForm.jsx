@@ -204,7 +204,7 @@ export default function SlideForm({
         <span>Category:</span>
         <div className='inputs'>
           <select
-            className='dropdown'
+            className={`dropdown ${errors.category ? 'error' : ''} `}
             {...register('category', { required: '*Select a Category' })}
             onChange={handleCategorySelection}
           >
