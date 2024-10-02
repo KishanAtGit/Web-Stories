@@ -43,7 +43,10 @@ export default function Homepage() {
   const query = useQuery();
   const storyId = query.get('storyId');
   const slideId = query.get('slideId');
-  const isShared = query.get('isShared');
+  const slideView = query.get('slideView');
+  const storyView = query.get('storyView');
+
+  console.log(storyId, slideId, slideView, storyView, 'queries');
 
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
@@ -106,10 +109,13 @@ export default function Homepage() {
 
   useEffect(() => {
     setIsSingleSlideViewed(toggleBookmark);
-    isShared &&
-      (setIsSingleSlideViewed(true),
-      handleStoryViewModal(true, storyId, slideId));
-  }, [toggleBookmark, isShared]);
+    if (slideView) {
+      setIsSingleSlideViewed(true),
+        handleStoryViewModal(true, storyId, slideId);
+    } else if (storyView) {
+      handleStoryViewModal(true, storyId, slideId);
+    }
+  }, [toggleBookmark, slideView, storyView]);
 
   // console.log(allStories, 'allStories');
 
@@ -121,6 +127,7 @@ export default function Homepage() {
         setToggleHamburger={setToggleHamburger}
         setOpenAddStoryModal={setOpenAddStoryModal}
         setToggleBookmark={setToggleBookmark}
+        toggleBookmark={toggleBookmark}
       />
       {!toggleBookmark ? (
         <Categories
@@ -179,6 +186,7 @@ export default function Homepage() {
           setOpenSignInModal={setOpenSignInModal}
           setIsSingleSlideViewed={setIsSingleSlideViewed}
           toggleBookmark={toggleBookmark}
+          storyView={storyView}
         />
       )}
       {toggleHamburger && (

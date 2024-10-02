@@ -10,6 +10,7 @@ export default function Navbar({
   setToggleHamburger,
   setOpenAddStoryModal,
   setToggleBookmark,
+  toggleBookmark,
 }) {
   const { isSignedIn } = useContext(SignedInContext);
 
@@ -18,6 +19,7 @@ export default function Navbar({
       {isSignedIn ? (
         <>
           <div
+            style={toggleBookmark ? { border: '3px solid #085CFF' } : {}}
             onClick={() => setToggleBookmark(prev => !prev)}
             className='bookmarks-button button'
           >

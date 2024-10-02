@@ -37,7 +37,6 @@
 }
 
 .slide-buttons {
-  margin-top: 3vh;
   display: flex;
   justify-content: flex-start;
   gap: 2vw;
@@ -163,7 +162,7 @@
   width: 5vw;
 }
 
-.slide-form .post-button {
+.post-button {
   position: absolute;
   right: 5%;
   bottom: 5%;
@@ -186,7 +185,7 @@
 @media only screen and (max-width: 450px) {
   .add-Story-modal {
     width: 65vw;
-    min-height: 55vh;
+    min-height: 57vh;
     gap: 2vh;
   }
 
@@ -271,9 +270,9 @@
     display: none;
   }
 
-  .slide-form .post-button {
-    right: 42%;
+  .post-button {
+    right: 40%;
     bottom: 3%;
-    width: 14vw;
+    width: 17vw;
   }
 }

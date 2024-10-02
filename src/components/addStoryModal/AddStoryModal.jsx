@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { SignedInContext } from '../../App';
 import { createStoryAPI, editStoryAPI } from '../../services/api.stories';
 import SlideForm from './SlideForm';
@@ -52,6 +52,7 @@ export default function AddStoryModal({
   const [selectedSlide, setSelectedSlide] = useState(0);
   const { setStoryUpdatedToggle } = useContext(SignedInContext);
   const { customModalStyles } = useContext(SignedInContext);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleModalClose = () => {
     setOpenAddStoryModal(false);
@@ -113,6 +114,23 @@ export default function AddStoryModal({
       handleModalClose();
     }
   };
+
+  const isFormValide = () => {
+    if (!storyData.category) return false; // Check if category is filled
+
+    // Check if all slides have filled fields
+    return storyData.slides.every(slide => {
+      return (
+        slide.heading.trim() !== '' &&
+        slide.description.trim() !== '' &&
+        slide.imageURL.trim() !== ''
+      );
+    });
+  };
+
+  useEffect(() => {
+    setIsDisabled(!isFormValide());
+  }, [storyData]);
 
   return (
     <Modal
@@ -180,6 +198,14 @@ export default function AddStoryModal({
           handleCreateStory={handleCreateStory}
         />
       </div>
+      <button
+        className='post-button button'
+        onClick={isEditMode ? handleUpdateStory : handleCreateStory}
+        disabled={!isFormValide()}
+        style={isDisabled ? { opacity: '0.5' } : {}}
+      >
+        Post
+      </button>
     </Modal>
   );
 }

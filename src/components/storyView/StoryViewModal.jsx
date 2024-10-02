@@ -21,6 +21,7 @@ export default function StoryViewModal({
   setOpenSignInModal,
   setIsSingleSlideViewed,
   toggleBookmark,
+  storyView,
 }) {
   if (!story) return null;
 
@@ -29,8 +30,15 @@ export default function StoryViewModal({
   const [currentSlide, setCurrentSlide] = useState(
     isSingleSlideViewed
       ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
+      : storyView === true
+      ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
       : story.slides[0]
   );
+
+  console.log(storyView, 'storyView');
+  console.log(storyViewModal.slideId, 'storyViewModal.slideId');
+
+  console.log(currentSlide, 'currentSlide');
 
   const { customModalStyles } = useContext(SignedInContext);
 
@@ -93,7 +101,7 @@ export default function StoryViewModal({
           alt='crossIcon'
           onClick={() => {
             !toggleBookmark && setIsSingleSlideViewed(false);
-            handleStoryViewModal(false, null);
+            handleStoryViewModal(false, null, null);
             navigate('/');
           }}
         />

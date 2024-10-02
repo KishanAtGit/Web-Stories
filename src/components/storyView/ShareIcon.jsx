@@ -3,7 +3,9 @@ import { notifyOnSuccess } from '../../axios.config';
 
 export default function ShareIcon({ storyId, slideId, isSingleSlideViewed }) {
   const handleShareClick = () => {
-    const shareUrl = `${window.location.href}?storyId=${storyId}&slideId=${slideId}&isShared=true`;
+    const shareUrl = isSingleSlideViewed
+      ? `${window.location.href}?storyId=${storyId}&slideId=${slideId}&slideView=true`
+      : `${window.location.href}?storyId=${storyId}&slideId=${slideId}&storyView=true`;
     navigator.clipboard.writeText(shareUrl);
     notifyOnSuccess('Link copied to clipboard');
   };

@@ -14,7 +14,6 @@ export default function SlideForm({
 }) {
   const {
     register,
-    getValues,
     handleSubmit,
     setValue,
     setError,
@@ -28,37 +27,6 @@ export default function SlideForm({
       category: storyData.category,
     },
   });
-
-  console.log(storyData, 'storyData');
-
-  // const saveSlideData = data => {
-  //   setStoryData(prev => ({
-  //     ...prev,
-  //     slides: prev.slides.map((slide, index) => {
-  //       if (index === activeSlideIndex) {
-  //         return {
-  //           ...slide,
-  //           heading: data.heading,
-  //           description: data.description,
-  //           imageURL: data.imageURL,
-  //         };
-  //       }
-  //       return slide;
-  //     }),
-  //   }));
-  //   activeSlideIndex < storyData.slides.length - 1 && handleNextClick();
-  // };
-
-  // const handleFinaleData = () => {
-  //   const lastSlideData = getValues();
-  //   saveSlideData(lastSlideData);
-  //   const postData = {
-  //     ...storyData,
-  //     slides: [...storyData.slides.slice(0, -1), lastSlideData],
-  //   };
-
-  //   handleCreateStory(postData);
-  // };
 
   const handlSlideNavigation = (data, e) => {
     if (e.nativeEvent.submitter.id === 'next-button') {
@@ -275,12 +243,6 @@ export default function SlideForm({
           Next
         </button>
       </div>
-      <button
-        className='post-button button'
-        onClick={isEditMode ? handleUpdateStory : handleCreateStory}
-      >
-        Post
-      </button>
     </form>
   );
 }
