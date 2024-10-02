@@ -5,7 +5,7 @@ export const getStoriesAPI = async () => {
     const response = await apiClient.get('story/getAllStories');
     return response;
   } catch (error) {
-    if (error.status === 404) notifyOnFail('Server Error');
+    if (error.status === 404) notifyOnFail('Unable to reach the server');
     return error.response;
   }
 };

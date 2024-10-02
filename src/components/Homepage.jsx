@@ -12,6 +12,8 @@ import AddStoryModal from './addStoryModal/AddStoryModal';
 import StoryViewModal from './storyView/StoryViewModal';
 import categories from '../constant/categories';
 import Story from './stories/Story';
+import Loader from './loader/Loader';
+import { notifyOnFail } from '../axios.config';
 // import stories from '../mock/stories';
 // import yourStories from '../mock/yourStories';
 // import yourBookmarks from '../mock/bookmarks';
@@ -24,6 +26,7 @@ export default function Homepage() {
   const [openAddStoryModal, setOpenAddStoryModal] = useState(false);
   const [toggleBookmark, setToggleBookmark] = useState(false);
   const [isSingleSlideViewed, setIsSingleSlideViewed] = useState(false);
+  const [loading, setLoading] = useState(true);
   const {
     isSignedIn,
     storyViewModal,
@@ -56,6 +59,7 @@ export default function Homepage() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const getAllStories = async () => {
       try {
         const response = await getStoriesAPI();
@@ -63,8 +67,10 @@ export default function Homepage() {
           setAllStories(response.data);
         }
       } catch (error) {
+        notifyOnFail('Unable to reach the server');
         console.log(error);
       }
+      setLoading(false);
     };
     getAllStories();
 
@@ -116,6 +122,10 @@ export default function Homepage() {
   }, [toggleBookmark, slideView, storyView]);
 
   // console.log(allStories, 'allStories');
+
+  if (loading) {
+    return <Loader />; // Show loader while data is being loaded
+  }
 
   return (
     <div className='homepage'>
