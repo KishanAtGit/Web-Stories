@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SignedInContext } from '../../App';
 import SlideTiles from './SlideTiles';

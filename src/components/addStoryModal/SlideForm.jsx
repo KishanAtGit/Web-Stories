@@ -33,6 +33,15 @@ export default function SlideForm({
   };
 
   const handleHeadingChange = event => {
+    if (event.target.value === '') {
+      setError('heading', {
+        type: 'manual',
+        message: '*Heading is required',
+      });
+    } else {
+      clearErrors('heading');
+    }
+
     setValue('heading', event.target.value);
     setStoryData(prev => ({
       ...prev,
@@ -49,6 +58,15 @@ export default function SlideForm({
   };
 
   const handleDescriptionChange = event => {
+    if (event.target.value === '') {
+      setError('description', {
+        type: 'manual',
+        message: '*Description is required',
+      });
+    } else {
+      clearErrors('description');
+    }
+
     setValue('description', event.target.value);
     setStoryData(prev => ({
       ...prev,
@@ -81,6 +99,15 @@ export default function SlideForm({
   };
 
   const handleCategorySelection = event => {
+    if (event.target.value === '') {
+      setError('category', {
+        type: 'manual',
+        message: '*Select a category',
+      });
+    } else {
+      clearErrors('category');
+    }
+
     const selectedCategory = event.target.value;
     setValue('category', selectedCategory);
     setStoryData(prev => ({

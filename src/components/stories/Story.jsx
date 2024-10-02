@@ -36,9 +36,7 @@ export default function Story({
       {isSingleSlideViewed ? (
         <div
           style={{ marginTop: '4vh', marginBottom: '4vh' }}
-          className={`stories ${
-            storyViewModal.openModal && mobileView ? 'hide' : ''
-          }`}
+          className={`stories`}
         >
           <div className='story-heading'>{categoryHeading}</div>
           <div className={stories.length === 0 ? 'no-stories' : 'story-cards'}>
@@ -93,7 +91,7 @@ export default function Story({
               : yourStoriesInMobileView === true
               ? 'stories-hide-mobile'
               : ''
-          }  ${storyViewModal.openModal && mobileView ? 'hide' : ''} `}
+          }`}
         >
           <div className='story-heading'>{categoryHeading}</div>
           <div className={stories.length === 0 ? 'no-stories' : 'story-cards'}>
