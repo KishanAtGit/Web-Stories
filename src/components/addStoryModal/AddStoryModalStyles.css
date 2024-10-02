@@ -185,7 +185,7 @@
 @media only screen and (max-width: 450px) {
   .add-Story-modal {
     width: 65vw;
-    height: 57vh;
+    height: 59vh;
     gap: 2vh;
   }
 
@@ -272,7 +272,7 @@
 
   .post-button {
     right: 40%;
-    bottom: 3%;
+    bottom: 4%;
     width: 17vw;
   }
 }
