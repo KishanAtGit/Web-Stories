@@ -126,6 +126,7 @@ export default function Homepage() {
   // if (loading) {
   //   return <Loader />; // Show loader while data is being loaded
   // }
+  console.log(storyViewModal, 'storyViewModal');
 
   return (
     <div className='homepage'>
@@ -151,7 +152,7 @@ export default function Homepage() {
         />
       )}
       {!toggleBookmark &&
-        (loading ? (
+        (loading && !storyViewModal.openModal ? (
           <Loader />
         ) : (
           <Stories
@@ -187,7 +188,7 @@ export default function Homepage() {
           setOpenAddStoryModal={setOpenAddStoryModal}
         />
       )}
-      {storyViewModal && (
+      {storyViewModal.openModal && (
         <StoryViewModal
           storyViewModal={storyViewModal}
           story={allStories.find(story => story._id === storyViewModal.storyId)}
