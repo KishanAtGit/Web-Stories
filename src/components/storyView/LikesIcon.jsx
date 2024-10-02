@@ -34,7 +34,6 @@ export default function LikesIcon({
         const res = await checkLikesAPI(currentSlide._id);
         if (res.status === 200) {
           setIsLiked(res.data.liked);
-          // setStoryUpdatedToggle(prev => !prev);
         }
       } catch (error) {
         console.log(error);

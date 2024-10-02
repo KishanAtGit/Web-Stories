@@ -150,15 +150,18 @@ export default function Homepage() {
           categoryHeading={'Your Bookmarks'}
         />
       )}
-      {!toggleBookmark && (
-        <Stories
-          categories={categories}
-          activeCategory={activeCategory}
-          stories={allStories}
-          yourStories={yourStories}
-          setOpenAddStoryModal={setOpenAddStoryModal}
-        />
-      )}
+      {!toggleBookmark &&
+        (loading ? (
+          <Loader />
+        ) : (
+          <Stories
+            categories={categories}
+            activeCategory={activeCategory}
+            stories={allStories}
+            yourStories={yourStories}
+            setOpenAddStoryModal={setOpenAddStoryModal}
+          />
+        ))}
       {openRegisterModal && (
         <AuthModal
           openAuthModal={openRegisterModal}
