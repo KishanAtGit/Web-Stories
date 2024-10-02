@@ -4,7 +4,7 @@ import { SignedInContext } from '../../App';
 import unbookmark from '../../assets/unbookmark.png';
 import bookmark from '../../assets/bookmark.png';
 
-export default function Bookmark({
+export default function BookmarkIcon({
   isPreBookmarked,
   storyId,
   currentSlide,

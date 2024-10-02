@@ -80,7 +80,7 @@
   margin-bottom: 0;
 }
 
-.slide-form > div {
+.slide-form > div:not(.slide-navigator-buttons) {
   margin-left: 2vw;
   display: flex;
   justify-content: space-between;
@@ -146,10 +146,10 @@
 .slide-form .slide-navigator-buttons {
   position: absolute;
   bottom: 5%;
-  left: 2%;
+  left: 10%;
   display: flex;
-  gap: 1vw;
-  width: 14vw;
+  justify-content: space-between;
+  width: 12vw;
   font-size: 0.6em;
 }
 
@@ -271,8 +271,8 @@
     display: none;
   }
 
-  .post-button {
-    right: 37%;
+  .slide-form .post-button {
+    right: 42%;
     bottom: 3%;
     width: 14vw;
   }

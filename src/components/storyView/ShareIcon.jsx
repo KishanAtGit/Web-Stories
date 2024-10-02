@@ -1,5 +1,5 @@
-import shareIcon from '../assets/shareIcon.png';
-import { notifyOnSuccess } from '../axios.config';
+import shareIcon from '../../assets/shareIcon.png';
+import { notifyOnSuccess } from '../../axios.config';
 
 export default function ShareIcon({ storyId, slideId, isSingleSlideViewed }) {
   const handleShareClick = () => {

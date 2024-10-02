@@ -2,14 +2,15 @@ import Modal from 'react-modal';
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SignedInContext } from '../../App';
-import Bookmark from '../bookmark/Bookmark';
-import Likes from '../likes/Likes';
+import SlideTiles from './SlideTiles';
+import BookmarkIcon from './BookmarkIcon';
+import LikesIcon from './LikesIcon';
+import ShareIcon from './ShareIcon';
 import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
 import storyViewRightIcon from '../../assets/story-view-right-icon.png';
 import slideViewCrossIcon from '../../assets/slide-view-cross-icon.png';
-import SlideTiles from '../../slideTiles/SlideTiles';
-import ShareIcon from '../ShareIcon';
 import './StoryViewModalStyles.css';
+import DownloadIcon from './DownloadIcon';
 
 export default function StoryViewModal({
   storyViewModal,
@@ -32,17 +33,6 @@ export default function StoryViewModal({
   );
 
   const { customModalStyles } = useContext(SignedInContext);
-
-  const removeQueryParams = () => {
-    // Get the current URL
-    const url = new URL(window.location.href);
-
-    // Set the search (query string) to an empty string
-    url.search = '';
-
-    // Update the URL in the browser without reloading the page
-    window.history.replaceState({}, document.title, url);
-  };
 
   const handleNextClick = () => {
     setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
@@ -116,7 +106,7 @@ export default function StoryViewModal({
           <div className='heading'>{currentSlide.heading}</div>
           <div className='description'>{currentSlide.description}</div>
         </div>
-        <Bookmark
+        <BookmarkIcon
           key={currentSlide._id + 'bookmark'}
           isPreBookmarked={yourBookmarks.some(
             slide => slide.slideId === currentSlide._id
@@ -125,7 +115,11 @@ export default function StoryViewModal({
           currentSlide={currentSlide}
           setOpenSignInModal={setOpenSignInModal}
         />
-        <Likes
+        <DownloadIcon
+          key={currentSlide._id + 'download'}
+          imageUrl={currentSlide.imageURL}
+        />
+        <LikesIcon
           key={currentSlide._id + 'likes'}
           storyId={story._id}
           currentSlide={currentSlide}

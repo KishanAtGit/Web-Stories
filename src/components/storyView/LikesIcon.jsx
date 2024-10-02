@@ -4,7 +4,11 @@ import { SignedInContext } from '../../App';
 import unlike from '../../assets/unlike.png';
 import like from '../../assets/like.png';
 
-export default function Likes({ storyId, currentSlide, setOpenSignInModal }) {
+export default function LikesIcon({
+  storyId,
+  currentSlide,
+  setOpenSignInModal,
+}) {
   const [isLiked, setIsLiked] = useState(false);
   const { isSignedIn, setStoryUpdatedToggle } = useContext(SignedInContext);
 

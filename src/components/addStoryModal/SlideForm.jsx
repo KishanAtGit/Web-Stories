@@ -31,33 +31,41 @@ export default function SlideForm({
 
   console.log(storyData, 'storyData');
 
-  const saveSlideData = data => {
-    setStoryData(prev => ({
-      ...prev,
-      slides: prev.slides.map((slide, index) => {
-        if (index === activeSlideIndex) {
-          return {
-            ...slide,
-            heading: data.heading,
-            description: data.description,
-            imageURL: data.imageURL,
-          };
-        }
-        return slide;
-      }),
-    }));
-    activeSlideIndex < storyData.slides.length - 1 && handleNextClick();
-  };
+  // const saveSlideData = data => {
+  //   setStoryData(prev => ({
+  //     ...prev,
+  //     slides: prev.slides.map((slide, index) => {
+  //       if (index === activeSlideIndex) {
+  //         return {
+  //           ...slide,
+  //           heading: data.heading,
+  //           description: data.description,
+  //           imageURL: data.imageURL,
+  //         };
+  //       }
+  //       return slide;
+  //     }),
+  //   }));
+  //   activeSlideIndex < storyData.slides.length - 1 && handleNextClick();
+  // };
 
-  const handleFinaleData = () => {
-    const lastSlideData = getValues();
-    saveSlideData(lastSlideData);
-    const postData = {
-      ...storyData,
-      slides: [...storyData.slides.slice(0, -1), lastSlideData],
-    };
+  // const handleFinaleData = () => {
+  //   const lastSlideData = getValues();
+  //   saveSlideData(lastSlideData);
+  //   const postData = {
+  //     ...storyData,
+  //     slides: [...storyData.slides.slice(0, -1), lastSlideData],
+  //   };
 
-    handleCreateStory(postData);
+  //   handleCreateStory(postData);
+  // };
+
+  const handlSlideNavigation = (data, e) => {
+    if (e.nativeEvent.submitter.id === 'next-button') {
+      handleNextClick();
+    } else if (e.nativeEvent.submitter.id === 'previous-button') {
+      handlePreviousClick();
+    }
   };
 
   const handleHeadingChange = event => {
@@ -69,6 +77,38 @@ export default function SlideForm({
           return {
             ...slide,
             heading: event.target.value,
+          };
+        }
+        return slide;
+      }),
+    }));
+  };
+
+  const handleDescriptionChange = event => {
+    setValue('description', event.target.value);
+    setStoryData(prev => ({
+      ...prev,
+      slides: prev.slides.map((slide, index) => {
+        if (index === activeSlideIndex) {
+          return {
+            ...slide,
+            description: event.target.value,
+          };
+        }
+        return slide;
+      }),
+    }));
+  };
+
+  const handleImageURLChange = event => {
+    setValue('imageURL', event.target.value);
+    setStoryData(prev => ({
+      ...prev,
+      slides: prev.slides.map((slide, index) => {
+        if (index === activeSlideIndex) {
+          return {
+            ...slide,
+            imageURL: event.target.value,
           };
         }
         return slide;
@@ -102,6 +142,7 @@ export default function SlideForm({
           });
         } else {
           clearErrors('imageURL');
+          handleImageURLChange({ target: { value: url } });
         }
       };
 
@@ -113,11 +154,12 @@ export default function SlideForm({
       };
     } else {
       clearErrors('imageURL');
+      handleImageURLChange({ target: { value: url } });
     }
   };
 
   return (
-    <form className='slide-form' onSubmit={handleSubmit(saveSlideData)}>
+    <form className='slide-form' onSubmit={handleSubmit(handlSlideNavigation)}>
       <div>
         <span>Heading:</span>
         <div className='inputs'>
@@ -152,6 +194,7 @@ export default function SlideForm({
                 message: 'Description must be less than 100 characters',
               },
             })}
+            onChange={handleDescriptionChange}
           ></textarea>
           {errors.description && (
             <div className='error-message'>{errors.description.message}</div>
@@ -177,6 +220,7 @@ export default function SlideForm({
                   } else {
                     // If it's an image or an invalid URL, we skip validation and clear errors
                     clearErrors('imageURL');
+                    handleImageURLChange({ target: { value: url } });
                     // setVideoError('');
                   }
                 },
@@ -212,28 +256,31 @@ export default function SlideForm({
         </span>
       </div>
       <div className='slide-navigator-buttons'>
-        <div
-          className={`previous-button button ${selectedSlide === 0 && 'hide'}`}
-          onClick={handlePreviousClick}
+        <button
+          id='previous-button'
+          type='submit'
+          className={`previous-button button ${
+            activeSlideIndex === 0 && 'hide'
+          }`}
         >
           Previous
-        </div>
+        </button>
         <button
+          id='next-button'
           type='submit'
           className={`next-button button ${
-            selectedSlide === storyData.slides.length - 1 && 'hide'
+            activeSlideIndex === storyData.slides.length - 1 && 'hide'
           } `}
-          // onClick={handleNextClick()}
         >
           Next
         </button>
       </div>
-      <div
+      <button
         className='post-button button'
-        onClick={isEditMode ? handleUpdateStory : handleFinaleData}
+        onClick={isEditMode ? handleUpdateStory : handleCreateStory}
       >
         Post
-      </div>
+      </button>
     </form>
   );
 }

@@ -73,9 +73,18 @@
 .story-view-modal .bookmark {
   position: absolute;
   bottom: 4%;
-  left: 13%;
+  left: 12%;
   height: 3.8vh;
   width: 1.4vw;
+  cursor: pointer;
+}
+
+.story-view-modal .download-icon {
+  position: absolute;
+  bottom: 3%;
+  left: 43%;
+  height: 4.4vh;
+  width: 2vw;
   cursor: pointer;
 }
 
@@ -180,6 +189,13 @@
     bottom: 5%;
     height: 4.5vh;
     width: 7.8vw;
+  }
+
+  .story-view-modal .download-icon {
+    bottom: 4%;
+    left: 45%;
+    height: 5vh;
+    width: 11vw;
   }
 
   .story-view-modal .likes {

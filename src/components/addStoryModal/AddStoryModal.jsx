@@ -98,7 +98,7 @@ export default function AddStoryModal({
     }
   };
 
-  const handleCreateStory = async storyData => {
+  const handleCreateStory = async () => {
     const res = await createStoryAPI(storyData);
     if (res.status === 201) {
       setStoryUpdatedToggle(prev => !prev);
