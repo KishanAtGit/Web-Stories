@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import categories from '../../constant/categories';
 
 export default function SlideForm({
   storyData,
@@ -8,9 +7,6 @@ export default function SlideForm({
   activeSlideIndex,
   handleNextClick,
   handlePreviousClick,
-  isEditMode,
-  handleUpdateStory,
-  handleCreateStory,
 }) {
   const {
     register,

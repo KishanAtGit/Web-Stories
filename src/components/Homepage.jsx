@@ -123,9 +123,9 @@ export default function Homepage() {
 
   // console.log(allStories, 'allStories');
 
-  if (loading) {
-    return <Loader />; // Show loader while data is being loaded
-  }
+  // if (loading) {
+  //   return <Loader />; // Show loader while data is being loaded
+  // }
 
   return (
     <div className='homepage'>
