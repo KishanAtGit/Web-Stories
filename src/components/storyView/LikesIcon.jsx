@@ -38,6 +38,7 @@ export default function LikesIcon({
       } catch (error) {
         console.log(error);
       }
+      setStoryUpdatedToggle(prev => !prev);
     };
 
     isSignedIn && checkLiked();

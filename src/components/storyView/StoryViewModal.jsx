@@ -27,38 +27,81 @@ export default function StoryViewModal({
 
   const navigate = useNavigate();
 
-  const [currentSlide, setCurrentSlide] = useState(
-    isSingleSlideViewed
-      ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
-      : storyView === true
-      ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
-      : story.slides[0]
-  );
+  // const [currentSlide, setCurrentSlide] = useState(
+  //   isSingleSlideViewed
+  //     ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
+  //     : storyView === true
+  //     ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
+  //     : story.slides[0]
+  // );
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(() => {
+    if (isSingleSlideViewed || storyView) {
+      return (
+        story?.slides.findIndex(
+          slide => slide._id === storyViewModal.slideId
+        ) || 0
+      );
+    }
+    return 0;
+  });
+
+  const currentSlide = story.slides[currentSlideIndex];
+
+  // useEffect(() => {
+  //   const newIndex =
+  //     isSingleSlideViewed || storyView
+  //       ? story?.slides.findIndex(
+  //           slide => slide._id === storyViewModal.slideId
+  //         ) || 0
+  //       : 0;
+
+  //   setCurrentSlideIndex(newIndex);
+  // }, [storyViewModal, story, isSingleSlideViewed, storyView]);
 
   console.log(storyView, 'storyView');
-  console.log(storyViewModal.slideId, 'storyViewModal.slideId');
+  console.log(isSingleSlideViewed, 'isSingleSlideViewed');
 
+  console.log(storyViewModal.slideId, 'storyViewModal.slideId');
   console.log(currentSlide, 'currentSlide');
 
   const { customModalStyles } = useContext(SignedInContext);
 
   const handleNextClick = () => {
-    setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
+    if (currentSlideIndex < story.slides.length - 1) {
+      setCurrentSlideIndex(prev => prev + 1);
+    }
   };
+
   const handlePreviousClick = () => {
-    setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) - 1]);
+    if (currentSlideIndex > 0) {
+      setCurrentSlideIndex(prev => prev - 1);
+    }
   };
+
+  // const handleNextClick = () => {
+  //   setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) + 1]);
+  // };
+  // const handlePreviousClick = () => {
+  //   setCurrentSlide(story.slides[story.slides.indexOf(currentSlide) - 1]);
+  // };
 
   // console.log(story, 'story');
   // console.log(currentSlide, 'currentSlide-viewModel');
 
-  useEffect(() => {
-    setCurrentSlide(
-      isSingleSlideViewed
-        ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
-        : story.slides[0]
-    );
-  }, [storyViewModal, story, isSingleSlideViewed]);
+  // useEffect(() => {
+  //   console.log(
+  //     story?.slides.find(slide => slide._id === storyViewModal.slideId),
+  //     'findLogic-viewModel'
+  //   );
+  //   setCurrentSlide(
+  //     isSingleSlideViewed
+  //       ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
+  //       : storyView === true
+  //       ? story?.slides.find(slide => slide._id === storyViewModal.slideId)
+  //       : story.slides[0]
+  //   );
+  // }, [storyViewModal, story, isSingleSlideViewed]);
 
   return (
     <Modal
