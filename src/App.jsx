@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { useIsMobile } from './hook/useMobile';
 
 import Homepage from './components/Homepage';
 import './App.css';
@@ -34,6 +35,8 @@ export default function App() {
     },
   };
 
+  const mobileView = useIsMobile();
+
   return (
     <>
       <BrowserRouter>
@@ -53,6 +56,7 @@ export default function App() {
                   customModalStyles,
                   yourStoriesInMobileView,
                   setYourStoriesInMobileView,
+                  mobileView,
                 }}
               >
                 <Homepage />
