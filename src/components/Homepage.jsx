@@ -46,8 +46,6 @@ export default function Homepage() {
   const slideView = query.get('slideView');
   const storyView = query.get('storyView');
 
-  console.log(storyId, slideId, slideView, storyView, 'queries');
-
   const handleRegisterSuccess = () => {
     setOpenRegisterModal(false);
     setOpenSignInModal(true);
