@@ -127,13 +127,13 @@
 
 @media only screen and (max-width: 450px) {
   .slide-view .slide-view-cross-icon {
-    top: 8%;
-    height: 2.8vh;
-    width: 6.4vw;
+    top: 10%;
+    height: 2.7vh;
+    width: 5.8vw;
   }
 
   .slide-view .share-icon {
-    top: 8%;
+    top: 10%;
     height: 3.5vh;
     width: 8vw;
   }
@@ -153,24 +153,26 @@
     border-radius: 0;
     box-shadow: none;
     width: 100vw;
-    height: 93vh;
+    height: 99vh;
     object-fit: cover;
   }
 
   .slide-tiles {
-    top: 8%;
+    top: 7.6%;
     width: 90vw;
   }
 
   .slide-tiles > * {
     /* width: fit-content; */
     flex: 1 1 calc(90vw / 6);
+    box-shadow: 0px 0px 15px -2px rgba(0, 0, 0, 0.999);
+    border-radius: 1em;
     /* width: calc(90vw / 6); */
     /* box-sizing: border-box; */
   }
 
   .story-view-modal .story-info {
-    bottom: 12%;
+    bottom: 12.5%;
     left: 8%;
     width: 85vw;
   }
@@ -179,33 +181,35 @@
     width: 50vw;
     font-size: 2.5em;
     font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.818);
   }
 
   .story-view-modal .story-info .description {
     font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
   .story-view-modal .bookmark {
-    bottom: 5%;
-    height: 4.5vh;
-    width: 7.8vw;
+    bottom: 7%;
+    height: 4.1vh;
+    width: 6.8vw;
   }
 
   .story-view-modal .download-icon {
-    bottom: 4%;
+    bottom: 6.6%;
     left: 45%;
-    height: 5vh;
-    width: 11vw;
+    height: 4.5vh;
+    width: 9.9vw;
   }
 
   .story-view-modal .likes {
-    bottom: 5%;
+    bottom: 7%;
     gap: 1.5vw;
   }
 
   .story-view-modal .likes img {
-    height: 4.5vh;
-    width: 10vw;
+    height: 4.2vh;
+    width: 8.5vw;
   }
 
   .story-view-modal .likes-count {

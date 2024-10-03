@@ -83,12 +83,12 @@ form {
 
 @media only screen and (max-width: 450px) {
   .auth-modal {
-    width: 60vw;
+    width: 63vw;
     height: 45vh;
   }
 
   form {
-    gap: 6vh;
+    gap: 5vh;
   }
 
   .form-inputs {
@@ -100,8 +100,15 @@ form {
   .form-inputs {
     font-weight: 600;
   }
+
   .form-inputs input {
-    width: 46vw;
+    width: 55vw;
+    height: 3vh;
+    font-size: 1em;
+  }
+
+  ::placeholder {
+    font-size: 0.8em;
   }
 
   .modal-button {
@@ -114,9 +121,9 @@ form {
   }
 
   .auth-modal .cross-icon {
-    top: 2vh;
-    right: 4vw;
-    height: 3vh;
+    top: 4vh;
+    right: 6vw;
+    height: 3.2vh;
     width: 6.5vw;
   }
 }

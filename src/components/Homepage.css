@@ -111,9 +111,9 @@
 
   .profile {
     width: 100vw;
-    height: 34vh;
+    height: 35vh;
     justify-content: center;
-    gap: 1.8vh;
+    gap: 1.5vh;
   }
 
   .profile .profile-container {
