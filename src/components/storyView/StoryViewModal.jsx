@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SignedInContext } from '../../App';
 import SlideTiles from './SlideTiles';
@@ -40,7 +40,7 @@ export default function StoryViewModal({
   });
 
   const currentSlide = story.slides[currentSlideIndex];
-
+  const [validImageURL, setValidImageURL] = useState(null);
   const { customModalStyles } = useContext(SignedInContext);
 
   const handleNextClick = () => {
@@ -54,6 +54,19 @@ export default function StoryViewModal({
       setCurrentSlideIndex(prev => prev - 1);
     }
   };
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = currentSlide.imageURL;
+
+    img.onload = () => {
+      setValidImageURL(currentSlide.imageURL);
+    };
+
+    img.onerror = () => {
+      setValidImageURL(null);
+    };
+  }, [currentSlide.imageURL]);
 
   return (
     <Modal
@@ -82,7 +95,7 @@ export default function StoryViewModal({
         ) : (
           <img
             className='story-slide'
-            src={currentSlide.imageURL || defaultNoImage}
+            src={validImageURL || defaultNoImage}
             alt='story-slide'
           />
         )}
@@ -99,36 +112,40 @@ export default function StoryViewModal({
             navigate('/');
           }}
         />
-        <ShareIcon
-          storyId={story._id}
-          slideId={currentSlide._id}
-          isSingleSlideViewed={isSingleSlideViewed}
-        />
-        <div className='story-info'>
-          <div className='heading'>{currentSlide.heading}</div>
-          <div className='description'>{currentSlide.description}</div>
-        </div>
-        <BookmarkIcon
-          key={currentSlide._id + 'bookmark'}
-          isPreBookmarked={yourBookmarks.some(
-            slide => slide.slideId === currentSlide._id
-          )}
-          storyId={story._id}
-          currentSlide={currentSlide}
-          setOpenSignInModal={setOpenSignInModal}
-        />
-        {!/\.(mp4|webm|ogg)$/.test(currentSlide.imageURL) && (
-          <DownloadIcon
-            key={currentSlide._id + 'download'}
-            imageUrl={currentSlide.imageURL}
-          />
+        {(validImageURL || /\.(mp4|webm|ogg)$/.test(currentSlide.imageURL)) && (
+          <>
+            <ShareIcon
+              storyId={story._id}
+              slideId={currentSlide._id}
+              isSingleSlideViewed={isSingleSlideViewed}
+            />
+            <div className='story-info'>
+              <div className='heading'>{currentSlide.heading}</div>
+              <div className='description'>{currentSlide.description}</div>
+            </div>
+            <BookmarkIcon
+              key={currentSlide._id + 'bookmark'}
+              isPreBookmarked={yourBookmarks.some(
+                slide => slide.slideId === currentSlide._id
+              )}
+              storyId={story._id}
+              currentSlide={currentSlide}
+              setOpenSignInModal={setOpenSignInModal}
+            />
+            {!/\.(mp4|webm|ogg)$/.test(currentSlide.imageURL) && (
+              <DownloadIcon
+                key={currentSlide._id + 'download'}
+                imageUrl={currentSlide.imageURL}
+              />
+            )}
+            <LikesIcon
+              key={currentSlide._id + 'likes'}
+              storyId={story._id}
+              currentSlide={currentSlide}
+              setOpenSignInModal={setOpenSignInModal}
+            />
+          </>
         )}
-        <LikesIcon
-          key={currentSlide._id + 'likes'}
-          storyId={story._id}
-          currentSlide={currentSlide}
-          setOpenSignInModal={setOpenSignInModal}
-        />
       </div>
       {!isSingleSlideViewed && (
         <img
