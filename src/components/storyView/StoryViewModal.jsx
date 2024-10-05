@@ -9,6 +9,7 @@ import ShareIcon from './ShareIcon';
 import storyViewLeftIcon from '../../assets/story-view-left-icon.png';
 import storyViewRightIcon from '../../assets/story-view-right-icon.png';
 import slideViewCrossIcon from '../../assets/slide-view-cross-icon.png';
+import defaultNoImage from '../../assets/defaultNoImage.webp';
 import './StoryViewModalStyles.css';
 import DownloadIcon from './DownloadIcon';
 
@@ -81,7 +82,7 @@ export default function StoryViewModal({
         ) : (
           <img
             className='story-slide'
-            src={currentSlide.imageURL}
+            src={currentSlide.imageURL || defaultNoImage}
             alt='story-slide'
           />
         )}

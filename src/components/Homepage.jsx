@@ -88,7 +88,6 @@ export default function Homepage() {
   }, [isSignedIn, storyUpdatedToggle]);
 
   useEffect(() => {
-    setActiveCategory([]);
     !isSignedIn &&
       (() => {
         setYourBookmarks([]);
@@ -120,6 +119,10 @@ export default function Homepage() {
       handleStoryViewModal(true, storyId, slideId);
     }
   }, [toggleBookmark, slideView, storyView]);
+
+  useEffect(() => {
+    setActiveCategory([]);
+  }, [isSignedIn]);
 
   // console.log(allStories, 'allStories');
 
