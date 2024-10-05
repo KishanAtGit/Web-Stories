@@ -126,7 +126,6 @@ export default function Homepage() {
   // if (loading) {
   //   return <Loader />; // Show loader while data is being loaded
   // }
-  console.log(storyViewModal, 'storyViewModal');
 
   return (
     <div className='homepage'>

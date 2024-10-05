@@ -75,7 +75,6 @@ export default function StoryViewModal({
             controls={false}
             autoPlay
             loop
-            muted
           >
             Your browser does not support the video tag.
           </video>
