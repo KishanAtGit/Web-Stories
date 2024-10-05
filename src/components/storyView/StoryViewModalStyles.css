@@ -26,6 +26,7 @@
   left: 5%;
   height: 2.2vh;
   width: 1vw;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.212);
   cursor: pointer;
 }
 
@@ -64,10 +65,12 @@
   text-wrap: pretty;
   font-size: 1.8em;
   font-weight: 600;
+  text-shadow: 0px 1px 8px rgba(0, 0, 0, 0.818);
 }
 
 .story-view-modal .story-info .description {
   font-size: 1em;
+  text-shadow: -1px 1px 4px rgba(0, 0, 0, 0.818);
 }
 
 .story-view-modal .bookmark {
@@ -121,6 +124,7 @@
 .slide-tiles > * {
   /* width: fit-content; */
   flex: 1 1 calc(18vw / 6);
+  box-shadow: 6px -5px 17px -1px rgba(0, 0, 0, 0.999);
   /* width: calc(18vw / 6); */
   /* box-sizing: border-box; */
 }
@@ -165,7 +169,6 @@
   .slide-tiles > * {
     /* width: fit-content; */
     flex: 1 1 calc(90vw / 6);
-    box-shadow: 0px 0px 15px -2px rgba(0, 0, 0, 0.999);
     border-radius: 1em;
     /* width: calc(90vw / 6); */
     /* box-sizing: border-box; */
@@ -181,12 +184,10 @@
     width: 50vw;
     font-size: 2.5em;
     font-weight: 600;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.818);
   }
 
   .story-view-modal .story-info .description {
     font-size: 1.5em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
   .story-view-modal .bookmark {
